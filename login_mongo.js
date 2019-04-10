@@ -436,21 +436,21 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 
 // //Load and initialize MessageBird SDK
 // var messagebird = require('messagebird')('0XOme5TvTkZeTa00xuWWiFIlC'); //Input message bird key here
-
+//
 // //Set up and configure the Express framework
 // app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 // app.set('view engine', 'handlebars');
-
-
+//
+//
 // //Display page to ask the user their phone number
 // app.get('/phone', function(req, res) {
 //     res.render('step1');
 // });
-
+//
 // //Handle phone number submission
 // app.post('/step2', function(req, res) {
 //     var number = req.body.number;
-
+//
 //     //Make request to verify API
 //     messagebird.verify.create(number, {
 //         template: "Your verification code is %token."
@@ -471,13 +471,13 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 //         }
 //     })
 // });
-
+//
 // //Verify whether the token is correct
-
+//
 // app.post('/step3', function(req, res) {
 //     var id = req.body.id;
 //     var token = req.body.token;
-
+//
 //     //Make request to verify API
 //     messagebird.verify.verify(id, token, function(err, response ) {
 //         if(err){
@@ -492,8 +492,8 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 //         }
 //     })
 // });
-
+//
 // //
-
-
-
+//
+//
+//
