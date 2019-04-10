@@ -96,13 +96,45 @@ app.post('/saveUser', function(request, response) {
     )
 });
 
+//Backup
+
+// app.get('/home/update/:name', function(request, response) {
+//
+//     // var username = request.body.username;
+//     var db = utils.getDb();
+//
+//     response.render("update.hbs");
+//     var pass_word = request.body.password;
+//     var first_name = request.body.first_name;
+//     var last_name = request.body.last_name;
+//     var email = request.body.email;
+//     var phone_num = request.body.phone_num;
+//
+//     var user_name = request.params.name;
+//     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+//         if(err){
+//             console.log('Unable to get user');
+//         }
+//         db.collection('bank').update({username: user_name}, {$set: {username: user_name, password: pass_word, first_name: first_name, last_name: last_name, email: email, phone_num:phone_num}});
+//         // response.send("Thank You");
+//         response.render('thankyou.hbs');
+//
+//     })
+// });
+
 
 app.get('/home/update/:name', function(request, response) {
 
     // var username = request.body.username;
+    response.render("update.hbs");
+
+});
+
+app.post('/home/update/update', function(request, response) {
+
+    // var username = request.body.username;
     var db = utils.getDb();
 
-    response.render("update.hbs");
     var pass_word = request.body.password;
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
@@ -114,13 +146,12 @@ app.get('/home/update/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
-        db.collection('bank').update({username: user_name}, {$set: {username: user_name, password: pass_word, first_name: first_name, last_name: last_name, email: email, phone_num:phone_num}});
+        db.collection('bank').update({username: user_name}, {$set: {username: user_name, password: "123456", first_name: first_name, last_name: last_name, email: email, phone_num:phone_num}});
         // response.send("Thank You");
         response.render('thankyou.hbs');
 
     })
 });
-
 
 
 app.del('/delUser', function (request, response) {
