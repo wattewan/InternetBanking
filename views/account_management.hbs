@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <title>Account Mangement</title>
     {{> navbar}}
-    
-</head>
-<body>
     {{> nav_format}}
+</head>
 
 
-<p>{{username}}</p>
-    <p>{{password}}</p>
-    <p>{{first_name}}</p>
-    <p>{{last_name}}</p>
-    <p>{{checkings}}</p>
-    <p>{{savings}}</p>
-    <p>{{email}}</p>
-    <p>{{phone_num}}</p>
+
+<body>
+
+<div id = "content" style="position:absolute;
+  top:10%;
+  left:20%;
+  margin-top:-70px;
+  margin-left:-50px;
+    font-family: Tahoma, Geneva,sans-serif;
+font-size:13px;">
+
+<p>Username: {{username}}</p>
+    <p>Password: {{password}}</p>
+    <p>First Name: {{first_name}}</p>
+    <p>Last Name: {{last_name}}</p>
+    <p>Checking Amount:{{checkings}}</p>
+    <p>Saving Amount:{{savings}}</p>
+    <p>Email: {{email}}</p>
+    <p>Phone Number: {{phone_num}}</p>
+
+</div>
 
 </body>
 </html>
