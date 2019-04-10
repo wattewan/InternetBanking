@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width,">
+    <meta name="viewport" content="width=device-width">
     <style>
         body {
             font-family: sans-serif;
@@ -33,11 +33,22 @@
 
         .main {
             margin-left: 200px;
+            text-align: center;
+            margin-top: 200px;
+        }
+
+        .background {
+            background-color: purple;
+
         }
 
 
     </style>
 </head>
+
+
+
+
 <body>
 
 <div class="sidenav">
@@ -46,10 +57,12 @@
     <a href="{{pages.[2]}}/{{username}}">Contact</a>
 </div>
 
+<div class=background">
 <div class="main">
-    <h2>Welcome {{first_name}}</h2>
+    <h1>Welcome {{first_name}}</h1>
     <p>Checking Account: {{checkings}} </p>
     <p>Savings Account: {{savings}} </p>
+</div>
 </div>
 
 </body>
