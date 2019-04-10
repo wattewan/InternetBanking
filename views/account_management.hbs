@@ -4,21 +4,29 @@
     <meta charset="UTF-8">
     <title>Account Mangement</title>
     {{> navbar}}
+    <style>
+        .infobar{
+            text-align: center;
+            margin-left: 300px;
+            margin-top: 150px;
+        }
+    </style>
     
 </head>
 <body>
     {{> nav_format}}
 
 
+<div class="infobar">
+    <p><b>Username:</b> {{username}}</p>
+    <p><b>Password:</b> {{password}}</p>
+    <p><b>First Name:</b> {{first_name}}</p>
+    <p><b>Last Name:</b> {{last_name}}</p>
+    <p><b>Checkings:</b> {{checkings}}</p>
+    <p><b>Savings:</b> {{savings}}</p>
+    <p><b>Email:</b> {{email}}</p>
+    <p><b>Phone Number:</b> {{phone_num}}</p>
 
-<p>{{username}}</p>
-    <p>{{password}}</p>
-    <p>{{first_name}}</p>
-    <p>{{last_name}}</p>
-    <p>{{checkings}}</p>
-    <p>{{savings}}</p>
-    <p>{{email}}</p>
-    <p>{{phone_num}}</p>
-
+</div>
 </body>
 </html>
