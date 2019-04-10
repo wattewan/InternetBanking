@@ -2,49 +2,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <style>
-        body {
-            font-family: Tahoma, Geneva, sans-serif;
-        }
-
-        .sidenav {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            padding-top: 20px;
-        }
-
-        .sidenav a {
-            padding: 6px 6px 6px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            font-family:Tahoma, Geneva, sans-serif;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .main {
-            margin-left: 200px;
-            text-align: center;
-            margin-top: 200px;
-        }
-
-        .background {
-            background-color: purple;
-
-        }
-
-
-    </style>
+    {{> navbar}}
+    {{> nav_format}}
+        
 </head>
 
 
@@ -52,11 +12,6 @@
 
 <body>
 
-<div class="sidenav">
-    <a href="{{pages.[0]}}/{{username}}">Account Info</a>
-    <a href="{{pages.[1]}}/{{username}}">Transactions</a>
-    <a href="{{pages.[2]}}/{{username}}">Update Account</a>
-</div>
 
 <div class=background">
 <div class="main">
@@ -68,6 +23,3 @@
 
 </body>
 </html>
-
-
-

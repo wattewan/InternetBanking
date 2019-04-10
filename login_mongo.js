@@ -126,11 +126,36 @@ app.post('/saveUser', function(request, response) {
 app.get('/home/update/:name', function(request, response) {
 
     // var username = request.body.username;
-    response.render("update.hbs");
+
+    var db = utils.getDb();
+    var user_name = request.params.name;
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
+            console.log('Unable to get user');
+        }
+        response.render('update.hbs', {
+        title: 'Home page',
+        username: docs[0].username,
+        password: docs[0].password,
+        first_name: docs[0].first_name,
+        last_name: docs[0].last_name,
+        checkings: docs[0].checkings,
+        savings: docs[0].savings,
+        email: docs[0].email,
+        phone_num: docs[0].phone_num,
+        pages: ['account', 'currency', 'update']
+        })
+    })
+
+
+
+    // response.render("update.hbs"), {
+    //     username: request.params.name
+    // };
 
 });
 
-app.post('/home/update/update', function(request, response) {
+app.post('/home/update/update/:name', function(request, response) {
 
     // var username = request.body.username;
     var db = utils.getDb();
@@ -140,15 +165,27 @@ app.post('/home/update/update', function(request, response) {
     var last_name = request.body.last_name;
     var email = request.body.email;
     var phone_num = request.body.phone_num;
+    
 
     var user_name = request.params.name;
+    
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
             console.log('Unable to get user');
         }
-        db.collection('bank').update({username: user_name}, {$set: {username: user_name, password: "123456", first_name: first_name, last_name: last_name, email: email, phone_num:phone_num}});
+        db.collection('bank').update({username: user_name}, 
+            {$set: 
+                {username: user_name, 
+            password: pass_word, 
+            first_name: first_name, 
+            last_name: last_name, 
+            email: email, 
+            phone_num: phone_num}});
         // response.send("Thank You");
-        response.render('thankyou.hbs');
+        response.render('thankyou.hbs', {
+            username: user_name,
+        })
+
 
     })
 });
@@ -322,13 +359,20 @@ app.post('/home/currency/deposit/:name', function(request, response) {
         }
 
         var balance = docs[0].checkings;
-        var new_balance = balance  + deposit;
-
-
-        db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
-
+        if (deposit.isInteger()){
+            var new_balance = parseInt(balance) + parseInt(deposit);
+            db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+        }
+        else {
+            response.render('error.hbs', {
+                username: user_name
+            })
+        
+        }
         // response.send("Thank You");
-        response.render('thankyou.hbs');
+        response.render('thankyou.hbs', {
+            username: user_name,
+        });
 
     })
     });
@@ -347,13 +391,22 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
         }
 
         var balance = docs[0].checkings;
-        var new_balance = balance  - withdraw;
-
-
-        db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
-
+        if (deposit.isInteger()){
+            var new_balance = parseInt(balance) + parseInt(deposit);
+        }
+        var new_balance = parseInt(balance) - parseInt(withdraw);
+        if (new_balance < 0) {
+            response.render('error.hbs', {
+                username: user_name
+            })
+        }
+        else {
+            db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+        }
         // response.send("Thank You");
-        response.render('thankyou.hbs');
+        response.render('thankyou.hbs', {
+            username: user_name,
+        });
 
     })
 });

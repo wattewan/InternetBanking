@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Account Mangement</title>
-    <p>{{username}}</p>
+    {{> navbar}}
+    
+</head>
+<body>
+    {{> nav_format}}
+
+
+
+<p>{{username}}</p>
     <p>{{password}}</p>
     <p>{{first_name}}</p>
     <p>{{last_name}}</p>
@@ -11,8 +19,6 @@
     <p>{{savings}}</p>
     <p>{{email}}</p>
     <p>{{phone_num}}</p>
-</head>
-<body>
 
 </body>
 </html>
