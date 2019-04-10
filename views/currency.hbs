@@ -1,25 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Convert Currency</title>
-    <p>Covert Currency password</p>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #111;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #818181;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .header{
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .main_header{
+            text-align: center;
+            font-weight: bold;
+            font-size: x-large;
+
+        }
+
+    </style>
 </head>
 <body>
 
-<h4>Deposit</h4>
-<form action="deposit/{{username}}" method="POST">
-    <!--<input type="text" name="withdraw" placeholder="Withdraw Amount" >-->
-    <input type="text" name="deposit" placeholder="Deposit Amount" >
-    <input type="submit">
-</form>
+<div class="container">
+    <p class="main_header">TRANSACTION FORM</p>
+    <br>
+    <br>
+    <p>Deposit</p>
+    <form action="deposit/{{username}}" method="POST">
+        <input type="text" name="deposit" placeholder="Deposit Amount" >
+        <input type="submit">
+    </form>
+    <br>
+    <br>
 
-<h4>Withdraw</h4>
-<form action="withdraw/{{username}}" method="POST">
-    <input type="text" name="withdraw" placeholder="Withdraw Amount" >
-    <!--<input type="text" name="deposit" placeholder="Deposit Amount" >-->
-    <input type="submit">
-</form>
+
+    <p>Withdraw</p>
+    <form action="withdraw/{{username}}" method="POST">
+        <input type="text" name="deposit" placeholder="Withdraw Amount" >
+        <input type="submit">
+    </form>
+
+</div>
 
 </body>
 </html>
