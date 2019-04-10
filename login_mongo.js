@@ -359,9 +359,12 @@ app.post('/home/currency/deposit/:name', function(request, response) {
         }
 
         var balance = docs[0].checkings;
-        if (deposit.isInteger()){
+        if (Number.isInteger(deposit)){
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+            response.render('thankyou.hbs', {
+            username: user_name,
+        });
         }
         else {
             response.render('error.hbs', {
@@ -370,9 +373,7 @@ app.post('/home/currency/deposit/:name', function(request, response) {
         
         }
         // response.send("Thank You");
-        response.render('thankyou.hbs', {
-            username: user_name,
-        });
+        
 
     })
     });
@@ -391,22 +392,27 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
         }
 
         var balance = docs[0].checkings;
-        if (deposit.isInteger()){
-            var new_balance = parseInt(balance) + parseInt(deposit);
-        }
-        var new_balance = parseInt(balance) - parseInt(withdraw);
-        if (new_balance < 0) {
+        if (Number.isInteger(withdraw) == false){
             response.render('error.hbs', {
                 username: user_name
             })
-        }
-        else {
-            db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
-        }
+           
+        } else{
+            var new_balance = parseInt(balance) - parseInt(withdraw);
+            if (new_balance < 0) {
+                response.render('error.hbs', {
+                    username: user_name
+                })
+            }
+            else {
+                db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+                response.render('thankyou.hbs', {
+                username: user_name,
+            });
+            }
+    }
         // response.send("Thank You");
-        response.render('thankyou.hbs', {
-            username: user_name,
-        });
+        
 
     })
 });
