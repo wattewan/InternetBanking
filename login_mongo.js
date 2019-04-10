@@ -50,7 +50,8 @@ app.post('/auth', function(request, response) {
                 if (userinfo.length > 0) {
                     //console.log(userinfo);
                     
-                    response.redirect(`/home/${username}`);
+                    // response.redirect(`/home/${username}`);
+                    response.redirect(`/phone/${username}`);
 
                 } else {
                     response.send('Incorrect Username and/or Password!');
@@ -269,6 +270,10 @@ app.get('/home/:name', function(request, response) {
     //     response.send('Please login to views this page!');
     // }
     // response.end();
+
+
+
+
 });
 
 app.get('/home/account/:name', function(request, response) {
@@ -422,8 +427,8 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 //     if (err) {
 //         return console.error('error: ' + err.message);
 //     }
-//
-//     console.log('Connected to the MySQL server port 3000');
+
+//     console.log(`Connected to the Mongo server port ${port}`);
 // });
 
 
@@ -434,66 +439,74 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 //     console.log('Close the database connection.');
 // });
 
-// //Load and initialize MessageBird SDK
-// var messagebird = require('messagebird')('0XOme5TvTkZeTa00xuWWiFIlC'); //Input message bird key here
+//Load and initialize MessageBird SDK
+var messagebird = require('messagebird')('nXHHvxdfonv5EegEe323A1Gv1'); //Input message bird key here
+
+//Set up and configure the Express framework
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
+//Display page to ask the user their phone number
+app.get('/phone/:name', function(req, res) {
+    var user_name = req.params.name;
+
+    res.render(`step1`, {
+        username: user_name
+    });
+});
+
+//Handle phone number submission
+app.post('/step2/:name', function(req, res) {
+    var number = req.body.number;
+    var user_name = req.params.name;
+
+    //Make request to verify API
+    messagebird.verify.create(number, {
+        template: "Your verification code is %token."
+    },function (err, response) {
+        if(err) {
+            //Request has failed
+            console.log(err);
+            res.render(`step1`,{
+                error: err.errors[0].description,
+                username: user_name
+            });
+        }
+        else{
+            //Request succeeds
+            console.log(response);
+            res.render(`step2`,{
+                id: response.id,
+                username: user_name
+            });
+        }
+    })
+});
+
+//Verify whether the token is correct
+
+app.post('/step3/:name', function(req, res) {
+    var id = req.body.id;
+    var token = req.body.token;
+    var user_name = req.params.name;
+
+    //Make request to verify API
+    messagebird.verify.verify(id, token, function(err, response ) {
+        if(err){
+            //Verification has failed
+            res.render('step2', {
+                error: err.errors[0].description,
+                id: id
+            })
+        } else {
+            //Verification was succe${username}
+            res.redirect(`/home/${user_name}`);
+        }
+    })
+});
+
 //
-// //Set up and configure the Express framework
-// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-// app.set('view engine', 'handlebars');
-//
-//
-// //Display page to ask the user their phone number
-// app.get('/phone', function(req, res) {
-//     res.render('step1');
-// });
-//
-// //Handle phone number submission
-// app.post('/step2', function(req, res) {
-//     var number = req.body.number;
-//
-//     //Make request to verify API
-//     messagebird.verify.create(number, {
-//         template: "Your verification code is %token."
-//     },function (err, response) {
-//         if(err) {
-//             //Request has failed
-//             console.log(err);
-//             res.render('step1',{
-//                 error: err.errors[0].description
-//             });
-//         }
-//         else{
-//             //Request succeeds
-//             console.log(response);
-//             res.render('step2',{
-//                 id: response.id
-//             });
-//         }
-//     })
-// });
-//
-// //Verify whether the token is correct
-//
-// app.post('/step3', function(req, res) {
-//     var id = req.body.id;
-//     var token = req.body.token;
-//
-//     //Make request to verify API
-//     messagebird.verify.verify(id, token, function(err, response ) {
-//         if(err){
-//             //Verification has failed
-//             res.render('step2', {
-//                 error: err.errors[0].description,
-//                 id: id
-//             })
-//         } else {
-//             //Verification was successful
-//             res.render('step3');
-//         }
-//     })
-// });
-//
-// //
-//
-//
-//
+
+
+
