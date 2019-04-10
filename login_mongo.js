@@ -1,10 +1,8 @@
-// import {AxiosStatic as callback} from "axios";
-
 const MongoClient = require('mongodb').MongoClient;
 const express = require('express');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8080;
-const hbs = require('hbs')
+const hbs = require('hbs');
 const request = require('request');
 
 var session = require('express-session');
@@ -74,7 +72,7 @@ app.post('/saveUser', function(request, response) {
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
     var checkings = request.body.checkings;
-    var savings = request.body.checkings;
+    var savings = request.body.savings;
     var email = request.body.email;
     var phone_num = request.body.phone_num;
     var total_balance = request.body.checkings + request.body.checkings;
@@ -97,6 +95,32 @@ app.post('/saveUser', function(request, response) {
         }
     )
 });
+
+
+app.get('/home/update/:name', function(request, response) {
+
+    // var username = request.body.username;
+    var db = utils.getDb();
+
+    response.render("update.hbs");
+    var pass_word = request.body.password;
+    var first_name = request.body.first_name;
+    var last_name = request.body.last_name;
+    var email = request.body.email;
+    var phone_num = request.body.phone_num;
+
+    var user_name = request.params.name;
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
+            console.log('Unable to get user');
+        }
+        db.collection('bank').update({username: user_name}, {$set: {username: user_name, password: pass_word, first_name: first_name, last_name: last_name, email: email, phone_num:phone_num}});
+        // response.send("Thank You");
+        response.render('thankyou.hbs');
+
+    })
+});
+
 
 
 app.del('/delUser', function (request, response) {
@@ -160,7 +184,7 @@ app.get('/home/:name', function(request, response) {
         savings: docs[0].savings,
         email: docs[0].email,
         phone_num: docs[0].phone_num,
-        pages: ['account', 'currency', 'contact']
+        pages: ['account', 'currency', 'update']
         })
 
     })
@@ -228,9 +252,6 @@ db.collection('bank').find({username: user_name}).toArray((err, docs) => {
 
 })
 });
-
-
-
 
 app.get('/home/contact/:name', function(request, response) {
 
