@@ -257,16 +257,11 @@ app.get('/home/contact/:name', function(request, response) {
     })
 });
 
-app.post('/home/currency/calculate/:name', function(request, response) {
-    // var id = request.body.id;
-    // var name = request.body.name;
-    // var email = request.body.email;
-
-    // response.send("OK")
+app.post('/home/currency/deposit/:name', function(request, response) {
 
     var db = utils.getDb();
-    var withdraw = request.body.withdraw;
-    var deposit = request.body.deposit;
+    // var withdraw = request.body.withdraw;
+    var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
@@ -274,19 +269,42 @@ app.post('/home/currency/calculate/:name', function(request, response) {
             console.log('Unable to get user');
         }
 
+        var balance = docs[0].checkings;
+        var new_balance = balance  + deposit;
 
-        var new_balance = docs[0].checkings - withdraw
 
         db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
 
-        response.send("Thank You");
+        // response.send("Thank You");
+        response.render('thankyou.hbs');
 
-
-    }
-    )
+    })
     });
 
 
+app.post('/home/currency/withdraw/:name', function(request, response) {
+
+    var db = utils.getDb();
+    var withdraw = request.body.withdraw;
+    // var deposit = Number(request.body.deposit);
+    var user_name = request.params.name;
+
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
+            console.log('Unable to get user');
+        }
+
+        var balance = docs[0].checkings;
+        var new_balance = balance  - withdraw;
+
+
+        db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+
+        // response.send("Thank You");
+        response.render('thankyou.hbs');
+
+    })
+});
 
 
 // connection.connect(function(err) {
