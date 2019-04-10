@@ -392,11 +392,14 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
         }
 
         var balance = docs[0].checkings;
-        if (Number.isInteger(withdraw) == false){
+        if (Number.isInteger(withdraw) === false){
             response.render('error.hbs', {
                 username: user_name
             })
-           
+
+        } else if (isNaN(withdraw)){
+            response.render(withdraw === 0)
+
         } else{
             var new_balance = parseInt(balance) - parseInt(withdraw);
             if (new_balance < 0) {
