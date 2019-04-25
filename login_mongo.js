@@ -51,7 +51,7 @@ app.post('/auth', function(request, response) {
                     //console.log(userinfo);
                     
                     // response.redirect(`/home/${username}`);
-                    response.redirect(`/phone/${username}`);
+                    response.redirect(`/home/${username}`);
 
                 } else {
                     response.send('Incorrect Username and/or Password!');
@@ -440,73 +440,73 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 // });
 
 //Load and initialize MessageBird SDK
-var messagebird = require('messagebird')('nXHHvxdfonv5EegEe323A1Gv1'); //Input message bird key here
-
-//Set up and configure the Express framework
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-
-//Display page to ask the user their phone number
-app.get('/phone/:name', function(req, res) {
-    var user_name = req.params.name;
-
-    res.render(`step1`, {
-        username: user_name
-    });
-});
-
-//Handle phone number submission
-app.post('/step2/:name', function(req, res) {
-    var number = req.body.number;
-    var user_name = req.params.name;
-
-    //Make request to verify API
-    messagebird.verify.create(number, {
-        template: "Your verification code is %token."
-    },function (err, response) {
-        if(err) {
-            //Request has failed
-            console.log(err);
-            res.render(`step1`,{
-                error: err.errors[0].description,
-                username: user_name
-            });
-        }
-        else{
-            //Request succeeds
-            console.log(response);
-            res.render(`step2`,{
-                id: response.id,
-                username: user_name
-            });
-        }
-    })
-});
-
-//Verify whether the token is correct
-
-app.post('/step3/:name', function(req, res) {
-    var id = req.body.id;
-    var token = req.body.token;
-    var user_name = req.params.name;
-
-    //Make request to verify API
-    messagebird.verify.verify(id, token, function(err, response ) {
-        if(err){
-            //Verification has failed
-            res.render('step2', {
-                error: err.errors[0].description,
-                id: id
-            })
-        } else {
-            //Verification was succe${username}
-            res.redirect(`/home/${user_name}`);
-        }
-    })
-});
-
+// var messagebird = require('messagebird')('nXHHvxdfonv5EegEe323A1Gv1'); //Input message bird key here
 //
+// //Set up and configure the Express framework
+// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+// app.set('view engine', 'handlebars');
+//
+//
+// //Display page to ask the user their phone number
+// app.get('/phone/:name', function(req, res) {
+//     var user_name = req.params.name;
+//
+//     res.render(`step1`, {
+//         username: user_name
+//     });
+// });
+//
+// //Handle phone number submission
+// app.post('/step2/:name', function(req, res) {
+//     var number = req.body.number;
+//     var user_name = req.params.name;
+//
+//     //Make request to verify API
+//     messagebird.verify.create(number, {
+//         template: "Your verification code is %token."
+//     },function (err, response) {
+//         if(err) {
+//             //Request has failed
+//             console.log(err);
+//             res.render(`step1`,{
+//                 error: err.errors[0].description,
+//                 username: user_name
+//             });
+//         }
+//         else{
+//             //Request succeeds
+//             console.log(response);
+//             res.render(`step2`,{
+//                 id: response.id,
+//                 username: user_name
+//             });
+//         }
+//     })
+// });
+//
+// //Verify whether the token is correct
+//
+// app.post('/step3/:name', function(req, res) {
+//     var id = req.body.id;
+//     var token = req.body.token;
+//     var user_name = req.params.name;
+//
+//     //Make request to verify API
+//     messagebird.verify.verify(id, token, function(err, response ) {
+//         if(err){
+//             //Verification has failed
+//             res.render('step2', {
+//                 error: err.errors[0].description,
+//                 id: id
+//             })
+//         } else {
+//             //Verification was succe${username}
+//             res.redirect(`/home/${user_name}`);
+//         }
+//     })
+// });
+//
+// //
 
 
 
