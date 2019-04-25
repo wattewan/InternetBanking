@@ -126,10 +126,10 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="y" value="22" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="21" />
     <option name="width" value="1440" />
-    <option name="height" value="828" />
+    <option name="height" value="829" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -171,7 +171,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="login_mongo.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
+    <configuration name="login_mongo.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <recent_temporary>
