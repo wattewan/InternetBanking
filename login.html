@@ -43,7 +43,7 @@
             font-size: 18px;
             text-align: right;
             width: 100%;
-            position: absolute;
+            position: fixed;
             bottom: 0;
             background: rgba(0, 0, 0, 0.2) !important;
             opacity: 0.9;
@@ -85,7 +85,7 @@
         .login-form h1 {
             text-align: center;
             color: #4d4d4d;
-            font-size: 24px;
+            font-size: 30px;
             padding: 20px 0 20px 0;
         }
         .login-form input[type="password"],
@@ -152,10 +152,11 @@
                         <input type="password" name="password" placeholder="Password" required>
                     </label>
                 </div>
-
                 <!--<input type="submit">-->
                 <button type="submit" class="btn-secondary">Submit</button>
-                <button type="button" onclick="" class="btn-secondary">Create Account</button>
+            </form>
+            <form action="/register" method="get">
+                <button type="button" class="btn-secondary">Create Account</button>
             </form>
         </div>
     </div>
