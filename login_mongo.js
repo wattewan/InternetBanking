@@ -54,10 +54,14 @@ app.post('/auth', function (request, response) {
     var username = request.body.username;
     var password = request.body.password;
     if (username && password) {
-        db.collection('bank').find({ username: username}).toArray(function (err, result) {
+        db.collection('bank').find({ username: username }).toArray(function (err, result) {
 
             let verify = bcrypt.compareSync(password, result[0].password);
-            if (verify) {
+            let confirmed = false;
+            if (result[0].verified == true) {
+                confirmed = true;
+            }
+            if (verify && confirmed) {
                 request.session.user = {
                     username: result[0].username,
                     password: result[0].password,
@@ -68,12 +72,16 @@ app.post('/auth', function (request, response) {
                     email: result[0].email,
                     phone_num: result[0].phone_num,
                     token: result[0].token,
-                    tokenExpire: result[0].tokenExpire
+                    tokenExpire: result[0].tokenExpire,
+                    confirmToken: result[0].confirmToken,
+                    verified: result[0].verified
                 };
 
                 response.redirect(`/home/${username}`);
-            } else {
+            } else if (!verify) {
                 response.send('Incorrect Username and/or Password!');
+            } else if (verify && !confirmed) {
+                response.send('Please verify your account through the email sent to your address.');
             }
 
             response.end();
@@ -90,13 +98,16 @@ app.post('/saveUser', function (request, response) {
     var password = request.body.password;
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
-    var checkings = request.body.checkings;
-    var savings = request.body.savings;
+    var checkings = 0;
+    var savings = 0;
     var email = request.body.email;
     var phone_num = request.body.phone_num;
     var token = "";
     var tokenExpire = "";
+    var confirmToken = "";
     var total_balance = request.body.checkings + request.body.checkings;
+
+    let create = true;
 
     var db = utils.getDb();
     db.collection('bank').insertOne({
@@ -109,14 +120,162 @@ app.post('/saveUser', function (request, response) {
         email: email,
         phone_num: phone_num,
         token: token,
-        tokenExpire: tokenExpire
+        tokenExpire: tokenExpire,
+        confirmToken: confirmToken,
+        verified: false
     }, (err, result) => {
         if (err) {
+            create = false;
             console.log('Unable to insert user');
         }
-        response.send(JSON.stringify(result.ops, undefined, 2));
+        //response.send(JSON.stringify(result.ops, undefined, 2));
+        if (create == true) {
+            response.redirect('/confirm-account');
+        }
     }
     )
+});
+
+app.get('/confirm-account', function (request, response) {
+
+    var db = utils.getDb();
+
+    response.render('confirm_account.hbs')
+
+});
+
+app.post('/create-account', function (request, response) {
+
+    var db = utils.getDb();
+    var email = request.body.email;
+    var confirmToken;
+
+    db.collection('bank').find({
+        email: email
+    }).toArray(function (err, result) {
+
+        if (!result[0]) {
+            response.render('basic_response.hbs', {
+                h1: 'No registered account with specified email address'
+            });
+        } else {
+
+            request.session.user = {
+                username: result[0].username,
+                password: result[0].password,
+                first_name: result[0].first_name,
+                last_name: result[0].last_name,
+                checkings: result[0].checkings,
+                savings: result[0].savings,
+                email: result[0].email,
+                phone_num: result[0].phone_num,
+                token: result[0].token,
+                tokenExpire: result[0].tokenExpire,
+                confirmToken: result[0].confirmToken,
+                verified: result[0].verified
+            };
+
+
+            crypto.randomBytes(15, function (err, buf) {
+                confirmToken = buf.toString('hex');
+
+                db.collection('bank').updateOne(
+                    { email: email },
+                    {
+                        $set: {
+                            confirmToken: confirmToken,
+                        }
+                    }
+                );
+
+                request.session.user.confirmToken = confirmToken;
+                request.session.save(function (err) {
+                    if (err) {
+                        console.log(err)
+                    }
+                });
+            });
+
+            var auth = {
+                type: 'oauth2',
+                user: 'internetbanking.node@gmail.com',
+                clientId: clientId,
+                clientSecret: clientSecret,
+                refreshToken: refreshToken,
+                accessToken: accessToken
+            };
+
+            db.collection('bank').find({
+                email: email
+            }).toArray(function (err, result) {
+                var mailOptions = {
+                    to: result[0].email,
+                    from: 'internetbanking.node@gmail.com',
+                    subject: 'Account Creation Confirmation',
+                    text: 'Click the following link to confirm your account and complete your registration. \n' +
+                        'localhost:8080' + '/confirm/' + request.session.user.confirmToken,
+                    auth: {
+                        user: 'internetbanking.node@gmail.com',
+                        refreshToken: refreshToken,
+                        accessToken: accessToken
+                    }
+                };
+
+                console.log(request.session.user.confirmToken);
+
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: auth
+                });
+
+                transporter.sendMail(mailOptions, (err, response) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+
+                if (err) {
+                    console.log(err);
+                } else {
+                    response.render('basic_response.hbs', {
+                        h1: 'A confirmation email has been sent'
+                    });
+                }
+            });
+        }
+    });
+
+});
+
+app.get('/confirm/:confirmToken', function(request, response) {
+
+    var db = utils.getDb();
+
+    db.collection('bank').find({
+        confirmToken: request.params.confirmToken
+    }).toArray(function (err, result) {
+        if (result[0] != null) {
+            db.collection('bank').updateOne(
+                { confirmToken: request.params.confirmToken },
+                {
+                    $set: {
+                        verified: true
+                    }
+                }
+            )
+            response.render('basic_response.hbs', {
+                h1: 'Account Verified',
+                message: 'You are now able to log in.'
+            });
+            console.log(result[0].password)
+        } else {
+            response.render('basic_response.hbs', {
+                h1: 'Invalid Token',
+                message: 'You have provided an invalid token. No changes have been made.'
+            });
+        }
+    });
+
 });
 
 //Backup
