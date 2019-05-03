@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="63a5d4f7-9896-46a1-a613-b003fcc9804a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/login_mongo.js" beforeDir="false" afterPath="$PROJECT_DIR$/login_mongo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/account_create.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/account_create.hbs" afterDir="false" />
-    </list>
+    <list default="true" id="63a5d4f7-9896-46a1-a613-b003fcc9804a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -55,7 +52,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login_mongo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1589">
+            <state relative-caret-position="2150">
               <caret line="271" column="14" selection-start-line="271" selection-start-column="14" selection-end-line="271" selection-end-column="14" />
               <folding>
                 <marker date="1556858784896" expanded="true" signature="25963:25966" ph="..." />
@@ -289,7 +286,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57149000" />
+    <option name="totallyTimeSpent" value="57428000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
@@ -477,7 +474,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login_mongo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1589">
+        <state relative-caret-position="2150">
           <caret line="271" column="14" selection-start-line="271" selection-start-column="14" selection-end-line="271" selection-end-column="14" />
           <folding>
             <marker date="1556858784896" expanded="true" signature="25963:25966" ph="..." />
