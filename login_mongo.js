@@ -53,12 +53,12 @@ app.post('/auth', function (request, response) {
     var db = utils.getDb();
     var username = request.body.username;
     var password = request.body.password;
-    console.log(password)
+
     if (username && password) {
         db.collection('bank').find({ username: username }).toArray(function (err, result) {
-            console.log(result[0].password)
+
             let verify = bcrypt.compareSync(password, result[0].password);
-            console.log(verify)
+
             let confirmed = false;
             if (result[0].verified === true) {
                 confirmed = true;
@@ -102,6 +102,7 @@ app.post('/saveUser', function (request, response) {
 
     var username = request.body.username;
     var password = request.body.password;
+    password = bcrypt.hashSync(password, saltRounds);
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
     var checkings = 0;
@@ -268,12 +269,11 @@ app.get('/confirm/:confirmToken', function(request, response) {
                         verified: true
                     }
                 }
-            )
+            );
             response.render('basic_response.hbs', {
                 h1: 'Account Verified',
                 message: 'You are now able to log in.'
             });
-            console.log(result[0].password)
         } else {
             response.render('basic_response.hbs', {
                 h1: 'Invalid Token',
@@ -740,8 +740,8 @@ app.get('/reset/:token', function (request, response) {
 app.post('/reset/:token', function (request, response) {
     var db = utils.getDb();
 
-    var password = request.body.password
-    password = bcrypt.hashSync(password, saltRounds)
+    var password = request.body.password;
+    password = bcrypt.hashSync(password, saltRounds);
 
     db.collection('bank').find({
         token: request.params.token
