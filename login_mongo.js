@@ -10,10 +10,10 @@ const crypto = require('crypto');
 const request = require('request');
 const saltRounds = 10;
 
-const clientId = "";
-const clientSecret = "";
-const accessToken = "";
-const refreshToken = "";
+const clientId = "1029651229301-joflh53096shnlrplnf6654bv2ku97pb.apps.googleusercontent.com";
+const clientSecret = "cxz4TMIpdTiuK0n2Adr6n3dc";
+const accessToken = "ya29.Glv8Bo4olL0UUFXDSKsIAvqvHToo8OpeF3SB_PLcwhNsvBi9zmqCbbyQiTW7jg4L7OvtsxYjGhDfLMIKLbqftLJGediOBChRqt3N0nEExJurs_VfKXd93M42iw93";
+const refreshToken = "1/Ke2tGXwC2gHXyVdCb67cSRYRGPa9pAD_XBee2GkENh4";
 
 var exphbs = require('express-handlebars');
 var path = require('path');
@@ -53,9 +53,12 @@ app.post('/auth', function (request, response) {
     var db = utils.getDb();
     var username = request.body.username;
     var password = request.body.password;
+    console.log(password)
     if (username && password) {
         db.collection('bank').find({ username: username }).toArray(function (err, result) {
+            console.log(result[0].password)
             let verify = bcrypt.compareSync(password, result[0].password);
+            console.log(verify)
             let confirmed = false;
             if (result[0].verified === true) {
                 confirmed = true;
