@@ -10,10 +10,10 @@ const crypto = require('crypto');
 const request = require('request');
 const saltRounds = 10;
 
-const clientId = ""
-const clientSecret = ""
-const accessToken = ""
-const refreshToken = ""
+const clientId = "";
+const clientSecret = "";
+const accessToken = "";
+const refreshToken = "";
 
 var exphbs = require('express-handlebars');
 var path = require('path');
@@ -55,10 +55,9 @@ app.post('/auth', function (request, response) {
     var password = request.body.password;
     if (username && password) {
         db.collection('bank').find({ username: username }).toArray(function (err, result) {
-
             let verify = bcrypt.compareSync(password, result[0].password);
             let confirmed = false;
-            if (result[0].verified == true) {
+            if (result[0].verified === true) {
                 confirmed = true;
             }
             if (verify && confirmed) {
@@ -90,6 +89,10 @@ app.post('/auth', function (request, response) {
         response.send('Please enter Username and Password!');
         response.end();
     }
+});
+
+app.get('/register', function (request, response) {
+    response.render('account_create.hbs')
 });
 
 app.post('/saveUser', function (request, response) {
@@ -129,7 +132,7 @@ app.post('/saveUser', function (request, response) {
             console.log('Unable to insert user');
         }
         //response.send(JSON.stringify(result.ops, undefined, 2));
-        if (create == true) {
+        if (create === true) {
             response.redirect('/confirm-account');
         }
     }
@@ -582,7 +585,7 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
         }
 
         var balance = docs[0].checkings;
-        if (Number.isInteger(parseInt(withdraw)) == false) {
+        if (Number.isInteger(parseInt(withdraw)) === false) {
             response.render('error.hbs', {
                 username: user_name
             })
