@@ -510,7 +510,6 @@ app.get('/home/account/:name', function (request, response) {
         response.render('account_management.hbs', {
             title: 'Home page',
             username: docs[0].username,
-            password: docs[0].password,
             first_name: docs[0].first_name,
             last_name: docs[0].last_name,
             checkings: docs[0].checkings,
