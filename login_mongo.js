@@ -10,14 +10,15 @@ const crypto = require('crypto');
 const request = require('request');
 const saltRounds = 10;
 
-const clientId = "1029651229301-joflh53096shnlrplnf6654bv2ku97pb.apps.googleusercontent.com";
-const clientSecret = "cxz4TMIpdTiuK0n2Adr6n3dc";
-const accessToken = "ya29.Glv8Bo4olL0UUFXDSKsIAvqvHToo8OpeF3SB_PLcwhNsvBi9zmqCbbyQiTW7jg4L7OvtsxYjGhDfLMIKLbqftLJGediOBChRqt3N0nEExJurs_VfKXd93M42iw93";
-const refreshToken = "1/Ke2tGXwC2gHXyVdCb67cSRYRGPa9pAD_XBee2GkENh4";
+const clientId = "";
+const clientSecret = "";
+const accessToken = "";
+const refreshToken = "";
 
 var exphbs = require('express-handlebars');
 var path = require('path');
 var utils = require('./mongo_init.js');
+var db = utils.getDb();
 
 
 var app = express();
@@ -102,46 +103,76 @@ app.post('/saveUser', function (request, response) {
 
     var username = request.body.username;
     var password = request.body.password;
-    password = bcrypt.hashSync(password, saltRounds);
-    var first_name = request.body.first_name;
-    var last_name = request.body.last_name;
-    var checkings = 0;
-    var savings = 0;
-    var email = request.body.email;
-    var phone_num = request.body.phone_num;
-    var token = "";
-    var tokenExpire = "";
-    var confirmToken = "";
-    var total_balance = request.body.checkings + request.body.checkings;
+    var repassword = request.body.repassword;
+    if (password != repassword) {
+        response.send('Passwords must match');
+    } else {
+        password = bcrypt.hashSync(password, saltRounds);
+        var first_name = request.body.first_name;
+        var last_name = request.body.last_name;
+        var checkings = 0;
+        var savings = 0;
+        var email = request.body.email;
+        var phone_num = request.body.phone_num;
+        var token = "";
+        var tokenExpire = "";
+        var confirmToken = "";
+        var total_balance = request.body.checkings + request.body.checkings;
 
-    let create = true;
+        var db = utils.getDb();
+        let create = true;
+        let goodEmail = true;
+        let goodUsername = true;
 
-    var db = utils.getDb();
-    db.collection('bank').insertOne({
-        username: username,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-        checkings: checkings,
-        savings: savings,
-        email: email,
-        phone_num: phone_num,
-        token: token,
-        tokenExpire: tokenExpire,
-        confirmToken: confirmToken,
-        verified: false
-    }, (err, result) => {
-        if (err) {
-            create = false;
-            console.log('Unable to insert user');
-        }
-        //response.send(JSON.stringify(result.ops, undefined, 2));
-        if (create === true) {
-            response.redirect('/confirm-account');
+        db.collection('bank').find({
+            email: email
+        }).toArray(function (err, result) {
+            if (result[0] != null) {
+                response.render('basic_response.hbs', {
+                    h1: 'Email in use'
+                })
+                create = false;
+            }
+        });
+
+
+        db.collection('bank').find({
+            username: username
+        }).toArray(function (err, result) {
+            if (result[0] == null && create == true) {
+                db.collection('bank').insertOne({
+                    username: username,
+                    password: password,
+                    first_name: first_name,
+                    last_name: last_name,
+                    checkings: checkings,
+                    savings: savings,
+                    email: email,
+                    phone_num: phone_num,
+                    token: token,
+                    tokenExpire: tokenExpire,
+                    confirmToken: confirmToken,
+                    verified: false
+                }, (err, result) => {
+                    if (err) {
+                        create = false;
+                        console.log('Unable to insert user');
+                        response.send('Unable to create user');
+                    }
+                    //response.send(JSON.stringify(result.ops, undefined, 2));
+                    if (create === true) {
+                        response.redirect('/confirm-account');
+                    }
+                })
+            } else {
+                response.render('basic_response.hbs', {
+                    h1: 'Username in use'
+                });
+            }
+        });
         }
     }
-    )
-});
+);
 
 app.get('/confirm-account', function (request, response) {
 
@@ -254,7 +285,7 @@ app.post('/create-account', function (request, response) {
 
 });
 
-app.get('/confirm/:confirmToken', function(request, response) {
+app.get('/confirm/:confirmToken', function (request, response) {
 
     var db = utils.getDb();
 
@@ -856,4 +887,4 @@ app.post('/reset/:token', function (request, response) {
 // //
 
 
-
+module.exports = app, utils, db;
