@@ -122,15 +122,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="package.json" />
-        <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>login</find>
+      <find>update</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -211,6 +210,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -224,8 +224,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Freyd\OneDrive\Desktop\Agile Project\InternetBanking\views" />
-      <recent name="C:\Users\Freyd\OneDrive\Desktop\Agile Project\InternetBanking\images" />
+      <recent name="C:\Users\xiaoh\OneDrive\桌面\github\InternetBanking\views" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xiaoh\OneDrive\桌面\github\InternetBanking\views" />
+      <recent name="C:\Users\xiaoh\OneDrive\桌面\github\InternetBanking\views\partials" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -240,20 +243,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.login_mongo.js">
-    <configuration name="account_create.hbs" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/InternetBanking/views/account_create.hbs">
-      <method v="2" />
-    </configuration>
-    <configuration name="homepage.hbs" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/InternetBanking/views/homepage.hbs">
-      <method v="2" />
-    </configuration>
-    <configuration name="login.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/InternetBanking/login.html">
-      <method v="2" />
-    </configuration>
-    <configuration name="temp.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/InternetBanking/temp.html">
-      <method v="2" />
-    </configuration>
-    <configuration name="login_mongo.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager">
+    <configuration name="login_mongo.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <list>
@@ -298,7 +289,7 @@
     <option name="totallyTimeSpent" value="60616000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17107001" />
@@ -321,13 +312,13 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17239101" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1269002" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32833788" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.04390935" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39918256" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -335,7 +326,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32833788" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32719547" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -351,65 +342,67 @@
     <entry file="file://$PROJECT_DIR$/views/layouts/thankyou.hbs" />
     <entry file="file://$PROJECT_DIR$/views/thankyou.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="74" column="6" selection-start-line="74" selection-start-column="6" selection-end-line="74" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mongo_init.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layouts/main.handlebars">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/mongo_init.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/step3.handlebars">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calculator.html" />
     <entry file="file://$PROJECT_DIR$/views/update.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
+        <state relative-caret-position="189">
           <caret line="34" column="9" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mochatest/package.json" />
-    <entry file="file://$PROJECT_DIR$/mochatest/app.js" />
-    <entry file="file://$PROJECT_DIR$/../../mochatest/app.js" />
-    <entry file="file://$PROJECT_DIR$/views/error.hbs">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/currency_calculator.js" />
     <entry file="file://$PROJECT_DIR$/views/step1.handlebars">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/temp.html" />
     <entry file="file://$PROJECT_DIR$/views/partials/account_css.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        <state>
+          <caret selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/WebstormProjects/Assignment1/css/doughnuts.css" />
-    <entry file="file://$USER_HOME$/WebstormProjects/Assignment1/Index.html" />
-    <entry file="file://$PROJECT_DIR$/views/step2.handlebars">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        <state>
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
+    <entry file="file://$PROJECT_DIR$/views/partials/nav_format.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5671">
-          <caret line="1976" column="6" lean-forward="true" selection-start-line="1976" selection-start-column="6" selection-end-line="1976" selection-end-column="6" />
+        <state relative-caret-position="85">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -450,10 +443,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/account_management.hbs">
+    <entry file="file://$PROJECT_DIR$/views/homepage.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="15" />
+        <state relative-caret-position="306">
+          <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
         </state>
       </provider>
     </entry>
