@@ -103,8 +103,11 @@ app.post('/saveUser', function (request, response) {
 
     var username = request.body.username;
     var password = request.body.password;
+    var goodPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
     var repassword = request.body.repassword;
-    if (password != repassword) {
+    if (goodPass == false) {
+        response.send('Password must be at least 8 characters long, have one uppercase letter and one lowercase letter')
+    } else if (password != repassword) {
         response.send('Passwords must match');
     } else {
         password = bcrypt.hashSync(password, saltRounds);
