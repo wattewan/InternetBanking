@@ -25,7 +25,7 @@
         }
 
         input[type=submit] {
-            background-color: #111;
+            background-color: #92c7c1;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -83,7 +83,23 @@
         .navbar-dark .navbar-nav .nav-link:hover {
             color: goldenrod;
         }
-
+        #orange{
+            width: 700px;
+            height: 400px;
+        }
+        #select{
+            background-color: #92c7c1;
+        }
+        .dropdown-menu{
+            background-color: gold;
+        }
+        .jumbotron{
+            border-radius:50px;
+            background-color:#faf2a1;
+            border-style: solid;
+            border-color: #92c7c1;
+            width:700px;
+        }
     </style>
 
 
@@ -112,20 +128,43 @@
     <p class="main_header">TRANSACTION FORM</p>
     <br>
     <br>
-    <p>Deposit</p>
-    <form action="deposit/{{username}}" method="POST">
-        <input type="text" name="deposit" placeholder="Deposit Amount" >
-        <input type="submit">
-    </form>
+    <div class="jumbotron">
+    <div class="dropdown">
+        <button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Account
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Chequing Account</a>
+            <a class="dropdown-item" href="#">Savings Account</a>
+        </div>
+    </div>
     <br>
     <br>
 
-
-    <p>Withdraw</p>
-    <form action="withdraw/{{username}}" method="POST">
-        <input type="text" name="withdraw" placeholder="Withdraw Amount" >
-        <input type="submit">
-    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="deposit/{{username}}" method="POST">
+                <label>
+                    Deposits
+                    <input type="text" name="deposit" placeholder="Deposit Amount" >
+                    <input type="submit">
+                </label>
+            </form>
+            <br>
+            <br>
+            <form action="withdraw/{{username}}" method="POST">
+                <label>
+                    Withdraw
+                    <input type="text" name="withdraw" placeholder="Withdraw Amount" >
+                    <input type="submit">
+                </label>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">
+        </div>
+    </div>
+    </div>
 
 </div>
 
