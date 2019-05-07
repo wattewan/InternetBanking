@@ -10,10 +10,11 @@ const crypto = require('crypto');
 const request = require('request');
 const saltRounds = 10;
 
-const clientId = "";
-const clientSecret = "";
-const accessToken = "";
-const refreshToken = "";
+
+const clientId = ""
+const clientSecret = ""
+const accessToken = ""
+const refreshToken = ""
 
 var exphbs = require('express-handlebars');
 var path = require('path');
@@ -103,10 +104,10 @@ app.post('/saveUser', function (request, response) {
 
     var username = request.body.username;
     var password = request.body.password;
-    var goodPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
     var repassword = request.body.repassword;
+    var goodPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
     if (goodPass == false) {
-        response.send('Password must be at least 8 characters long, have one uppercase letter and one lowercase letter')
+        response.send('Password must be at least 8 characters long, have one uppercase letter and one lowercase letter');
     } else if (password != repassword) {
         response.send('Passwords must match');
     } else {
@@ -124,8 +125,6 @@ app.post('/saveUser', function (request, response) {
 
         var db = utils.getDb();
         let create = true;
-        let goodEmail = true;
-        let goodUsername = true;
 
         db.collection('bank').find({
             email: email
