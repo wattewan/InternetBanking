@@ -54,9 +54,9 @@ app.use('/home/update/:name', (request, response, next) => {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (String(request.session.user.username) != name) {
+    } else if (request.session.user.username != name) {
         response.send('Cannot view the page of another user');
-    } else if (String(request.session.user.username) === name) {
+    } else if (request.session.user.username === name) {
         next();
     }
 
