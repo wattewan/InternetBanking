@@ -498,6 +498,14 @@ app.get('/home/update/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
 
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -537,6 +545,14 @@ app.post('/home/update/update/:name', function (request, response) {
 
 
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -611,6 +627,15 @@ app.get('/home/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -652,6 +677,15 @@ app.get('/home/account/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -676,6 +710,15 @@ app.get('/home/e_transfer/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+    
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -704,6 +747,14 @@ app.post('/home/e_transfer/:name', function (request, response) {
     var email = request.body.email;
     var e_password = request.body.e_password;
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     response.render('thankyou.hbs', {
         username: user_name,
@@ -737,6 +788,15 @@ app.post('/home/e_transfer/:name', function (request, response) {
 app.get('/home/e_transfer/collect/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -760,6 +820,14 @@ app.get('/home/e_transfer/collect/:name', function (request, response) {
 app.post('/home/e_transfer/collect/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if (err) {
@@ -788,6 +856,14 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
     var db = utils.getDb();
     var user_name = request.params.name;
     var password_attempt = request.body.password;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -829,6 +905,15 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
 app.get('/home/cur_calculator/:name', function(request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
             console.log('Unable to get user');
@@ -853,6 +938,15 @@ app.get('/home/currency/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -878,6 +972,15 @@ app.get('/home/contact/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -904,6 +1007,15 @@ app.post('/home/currency/deposit/:name', function (request, response) {
     // var withdraw = request.body.withdraw;
     var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -945,6 +1057,14 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
     var currency1 = request.body.curr1
     var currency2 = request.body.curr2
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
