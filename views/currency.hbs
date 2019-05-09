@@ -84,8 +84,7 @@
             color: goldenrod;
         }
         #orange{
-            width: 700px;
-            height: 400px;
+            object-fit: fill;
         }
         #select{
             background-color: #92c7c1;
@@ -93,13 +92,24 @@
         .dropdown-menu{
             background-color: gold;
         }
-        .jumbotron{
+        .jumbotron-fluid{
             border-radius:50px;
             background-color:#faf2a1;
             border-style: solid;
             border-color: #92c7c1;
-            width:700px;
+            -webkit-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
+            -moz-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
+            box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
         }
+
+        .content {
+            margin: 20px;
+        }
+
+        .class {
+            top: 100px;
+        }
+
     </style>
 
 
@@ -128,46 +138,55 @@
     <p class="main_header">TRANSACTION FORM</p>
     <br>
     <br>
-    <div class="jumbotron">
-    <div class="dropdown">
-        <button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select Account
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Chequing Account</a>
-            <a class="dropdown-item" href="#">Savings Account</a>
-        </div>
-    </div>
-    <br>
-    <br>
-
-    <div class="row">
-        <div class="col-md-6">
-            <form action="deposit/{{username}}" method="POST">
-                <label>
-                    Deposits
-                    <input type="text" name="deposit" placeholder="Deposit Amount" >
-                    <input type="submit">
-                </label>
-            </form>
-            <br>
-            <br>
-            <form action="withdraw/{{username}}" method="POST">
-                <label>
-                    Withdraw
-                    <input type="text" name="withdraw" placeholder="Withdraw Amount" >
-                    <input type="submit">
-                </label>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">
-        </div>
-    </div>
-    </div>
 
 </div>
 
+<div class="container class">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron-fluid" id="jumbo">
+                <div class="content">
+                    <div class="dropdown">
+                        <button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Select Account
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Chequing Account</a>
+                            <a class="dropdown-item" href="#">Savings Account</a>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+
+                    <form action="deposit/{{username}}" method="POST">
+                        <label>
+                            Deposits
+                            <input type="text" name="deposit" placeholder="Deposit Amount" >
+                            <input type="submit">
+                        </label>
+                    </form>
+                    <br>
+                    <br>
+                    <form action="withdraw/{{username}}" method="POST">
+                        <label>
+                            Withdraw
+                            <input type="text" name="withdraw" placeholder="Withdraw Amount" >
+                            <input type="submit">
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">-->
 
 <footer>
     &#169;Citrus Bank 2019 - All Rights Reserved
