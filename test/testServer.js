@@ -15,7 +15,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 describe('/saveUser', function () {
 
     it('add a single user on /saveUser POST', function (done) {
-        client.connect()
+        client.connect();
         chai.request(server)
             .post('/saveUser', {
                 json: true
@@ -40,4 +40,32 @@ describe('/saveUser', function () {
                 done();
             });
     })
-})
+});
+
+describe('/home/e_transfer/:name', function () {
+    it('Send an E-Transfer to designated account based on email', function (done) {
+        client.connect();
+        chai.request(server)
+            .post('/home/e_transfer/:name', {
+                json: true
+            })
+            .set('Content-Type', 'application/json')
+            .send({
+                'transfer': 1000,
+                'e_password': 'test_pass',
+                'from': 'Test',
+                'to': 'test@gmail.com',
+            })
+            .end(function (err, res) {
+                //res.should.be.json;
+                console.log(res.request._data);
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.request._data.transfer.should.equal(1000);
+                res.request._data.e_password.should.equal('test_pass');
+                res.request._data.to.should.equal('test@gmail.com');
+                res.request._data.from.should.equal('Test');
+                done();
+            });
+    })
+});
