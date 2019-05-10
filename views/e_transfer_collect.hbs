@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <div class="collapse sidenav-collapse" id="sidenav">
         {{> navbar}}
         {{> nav_format}}
@@ -11,16 +11,14 @@
     <style>
         .jumbotron{
             border-radius:50px;
-            background-color:#faf2a1;
+            background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
             border-style: solid;
-            border-color:#92c7c1;
+            border-color: #eae395;
             -webkit-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
             -moz-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
             box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
-            width: 30%;
+            width: 600px;
             margin-top: 200px;
-            margin-right: 700px;
-            margin-left: 700px;
             text-align: center;
         }
         .jumbotron h1, p{
@@ -102,13 +100,19 @@
             text-align: left;
         }
         .ham{
-            border: solid orange;
+            border: solid yellow;
             border-radius: 3px;
         }
         .ham button{
+            background: linear-gradient(40deg,#ffd86f, #e37700)!important;
             position: fixed;
             right: 1%;
             top: 1%;
+        }
+        .row{
+            width: 98%;
+            margin-left: 1%;
+            margin-right: 1%;
         }
         footer{
             font-size: 18px;
@@ -128,7 +132,7 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <a class="navbar-brand" href="#"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus Bank Login</a>
             <div class="ham">
-                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target=".sidenav-collapse"
+                <button class="btn orange-gradient" type="button" data-toggle="collapse" data-target=".sidenav-collapse"
                         aria-controls="sidenav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars fa-2x"></i>
                     <!--<i class="fa fa-times fa-2x collapse icon-collapse" id="icon"></i>-->
@@ -144,16 +148,19 @@
         </nav>
     </header>
 </div>
-
-<div class="jumbotron">
-    <form class="login-form" action="e_deposit/{{username}}" method="POST">
-        <h1 class="main_header">TRANSACTION FORM</h1>
-        <label class="label">
-            Deposit
-            <input type="text" name="password" placeholder="Set Password" >
-            <button class="btn btn-secondary" type="submit">Submit</button>
-        </label>
-    </form>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="jumbotron col-md-4">
+        <form class="login-form" action="e_deposit/{{username}}" method="POST">
+            <h1 class="main_header">TRANSACTION FORM</h1>
+            <label class="label">
+                Deposit
+                <input type="text" name="password" placeholder="Set Password" >
+                <button class="btn btn-secondary" type="submit">Submit</button>
+            </label>
+        </form>
+    </div>
+    <div class="col-md-4"></div>
 </div>
 <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
