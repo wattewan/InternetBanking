@@ -2,8 +2,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    {{> navbar}}
-    {{> nav_format}}
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -146,22 +144,38 @@
         <div class="col-sm-6">
             <div class="jumbotron-fluid" id="jumbo">
                 <div class="content">
-                    <div class="dropdown">
-                        <button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Select Account
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Chequing Account</a>
-                            <a class="dropdown-item" href="#">Savings Account</a>
-                        </div>
-                    </div>
+                    <!--<form>-->
+                    <!--<div class="dropdown">-->
+                        <!--<button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                            <!--Select Account-->
+                        <!--</button>-->
+                        <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                            <!--<a class="dropdown-item" href="#">Chequing Account</a>-->
+                            <!--<a class="dropdown-item" href="#">Savings Account</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--</form>-->
+
+                    <!--
+                    <select>
+                        <option selected> Select a account </option>
+                        <option> checkings </option>
+                        <option> savings </option>
+                    </select>
                     <br>
-                    <br>
+                    <br>-->
 
 
                     <form action="deposit/{{username}}" method="POST">
+                        Deposits
                         <label>
-                            Deposits
+                        <select name="account">
+                            <option selected> Select a account </option>
+                            <option> checkings </option>
+                            <option> savings </option>
+                        </select>
+
+
                             <input type="text" name="deposit" placeholder="Deposit Amount" >
                             <input type="submit">
                         </label>
@@ -169,8 +183,15 @@
                     <br>
                     <br>
                     <form action="withdraw/{{username}}" method="POST">
+                        Withdraw
                         <label>
-                            Withdraw
+                        <select name="account">
+                            <option selected> Select a account </option>
+                            <option> checkings </option>
+                            <option> savings </option>
+                        </select>
+
+
                             <input type="text" name="withdraw" placeholder="Withdraw Amount" >
                             <input type="submit">
                         </label>

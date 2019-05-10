@@ -41,152 +41,152 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use('/home/update/:name', (request, response, next) => {
-
-    var name = String(request.params.name);
-    console.log(request.session.user.username);
-    console.log(name);
-    if (request.session.user.username === name) {
-        console.log('Should work');
-    } else if (request.session.user.username != name) {
-        console.log('Should not work');
-    }
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (String(request.session.user.username) != name) {
-        response.send('Cannot view the page of another user');
-    } else if (String(request.session.user.username) === name) {
-        next();
-    }
-
-});
-
-app.use('/home/update/update/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/user/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/account/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/e_transfer/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/currency/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/contact/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/currency/deposit/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
-
-app.use('/home/currency/withdraw/:name', (request, response, next) => {
-
-    var name = request.params.name;
-
-    if (!request.session.user) {
-        response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != name) {
-        response.send('Cannot view the page of another user');
-    } else if (request.session.user.username === name) {
-        next();
-    }
-
-});
+// app.use('/home/update/:name', (request, response, next) => {
+//
+//     var name = String(request.params.name);
+//     console.log(request.session.user.username);
+//     console.log(name);
+//     if (request.session.user.username === name) {
+//         console.log('Should work');
+//     } else if (request.session.user.username != name) {
+//         console.log('Should not work');
+//     }
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (String(request.session.user.username) != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (String(request.session.user.username) === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/update/update/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/user/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/account/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/e_transfer/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/contact/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/deposit/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/withdraw/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
 
 app.get('/', function (request, response) {
 
@@ -1005,6 +1005,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
+    var account = request.body.account;
     var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
 
@@ -1022,10 +1023,19 @@ app.post('/home/currency/deposit/:name', function (request, response) {
             console.log('Unable to get user');
         }
 
-        var balance = docs[0].checkings;
-        if (Number.isInteger(deposit)) {
+
+        if (Number.isInteger(deposit) && (account === 'checkings')) {
+            var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+        }
+        else if (Number.isInteger(deposit) && (account === 'savings')) {
+            var balance = docs[0].savings;
+            var new_balance = parseInt(balance) + parseInt(deposit);
+            db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
             response.render('thankyou.hbs', {
                 username: user_name,
             });
@@ -1043,11 +1053,57 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 });
 
 
-app.post('/home/currency/deposit/:name', function(request, response) {
+
+app.post('/home/currency/withdraw/:name', function(request, response) {
+
+    var db = utils.getDb();
+    var account = request.body.account;
+    var withdraw = request.body.withdraw;
+    // var deposit = Number(request.body.deposit);
+    var user_name = request.params.name;
+
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
+            console.log('Unable to get user');
+        }
+        if (Number.isInteger(parseInt(withdraw)) === false){
+            response.render('error.hbs', {
+                username: user_name
+            })
+
+        } else{
+            if (account === 'savings') {
+                var balance = docs[0].savings;
+                var new_balance = parseInt(balance) - parseInt(withdraw);
+                if (new_balance < 0) {
+                    response.render('error.hbs', {
+                        username: user_name
+                    })
+                }
+                db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
+                response.render('thankyou.hbs', {
+                    username: user_name,
+                });
+            }
+            else {
+                var balance = docs[0].checkings;
+                var new_balance = parseInt(balance) - parseInt(withdraw);
+                if (new_balance < 0) {
+                    response.render('error.hbs', {
+                        username: user_name
+                    })
+                }
+                db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
+                response.render('thankyou.hbs', {
+                    username: user_name,
+                });
+            }
+        }
+        // response.send("Thank You");
 
 
+    })
 });
-
 
 app.post('/cur_calculator/convert/:name', function(request, response) {
 

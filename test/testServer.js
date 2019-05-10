@@ -1,5 +1,5 @@
 'use strict';
-
+const app = require('../login_mongo');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../login_mongo');
@@ -40,34 +40,6 @@ describe('POST Requests', function () {
     })
 });
 
-describe('/home/e_transfer/:name', function () {
-    it('Send an E-Transfer to designated account based on email', function (done) {
-        client.connect();
-        chai.request(server)
-            .post('/home/e_transfer/:name', {
-                json: true
-            })
-            .set('Content-Type', 'application/json')
-            .send({
-                'transfer': 1000,
-                'e_password': 'test_pass',
-                'from': 'Test',
-                'to': 'test@gmail.com',
-            })
-            .end(function (err, res) {
-                //res.should.be.json;
-                console.log(res.request._data);
-                res.should.have.status(200);
-                res.body.should.be.a('object');
-                res.request._data.transfer.should.equal(1000);
-                res.request._data.e_password.should.equal('test_pass');
-                res.request._data.to.should.equal('test@gmail.com');
-                res.request._data.from.should.equal('Test');
-                done();
-            });
-    })
-})
-
 describe('GET Requests', function() {
     it('GET /', function(done) {
         chai.request(server)
@@ -92,5 +64,15 @@ describe('GET Requests', function() {
                 res.should.have.status(200);
                 done();
             })
-    }); 
+    });
+    it('GET /e_transfer', function(done) {
+        chai.request(server)
+            .get('/home/e_transfer')
+            .end(function(err, res) {
+                res.should.have.status(200);
+                done();
+            })
+    })
 });
+
+
