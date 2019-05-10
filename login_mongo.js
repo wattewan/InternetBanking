@@ -883,7 +883,8 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
             var e_password = docs[0].e_password;
             if (password_attempt === e_password) {
                 var new_balance = parseInt(balance) + parseInt(e_transfer);
-                db.collection('bank').update({ username: user_name }, { $set: { checkings: new_balance } });
+                db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+                db.collection('bank').deleteOne({e_transfer: true, to: email});
                 response.render('thankyou.hbs', {
                     username: user_name,
                 });
