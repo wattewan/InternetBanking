@@ -87,6 +87,9 @@
             font-weight: bold;
             color: #ffffff;
         }
+        .content {
+            margin: 20px;
+        }
         .content-wrap{
             padding-bottom: 2.5rem;
         }
@@ -150,7 +153,8 @@
 </div>
 <div class="row">
     <div class="col-md-4"></div>
-    <div class="jumbotron col-md-4">
+    <div class="jumbotron col-md-6">
+        <div class="content">
         <form class="login-form" action="e_deposit/{{username}}" method="POST">
             <h1 class="main_header">TRANSACTION FORM</h1>
             <label class="label">
@@ -159,6 +163,7 @@
                 <button class="btn btn-secondary" type="submit">Submit</button>
             </label>
         </form>
+        </div>
     </div>
     <div class="col-md-4"></div>
 </div>
