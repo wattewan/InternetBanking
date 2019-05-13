@@ -6,9 +6,11 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-        body {font-family: Arial, Helvetica, sans-serif;
-        padding-left: 20px;}
-        * {box-sizing: border-box;}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: gold;
+        }
+
 
 
         input[type=text], select, textarea {
@@ -34,11 +36,9 @@
         input[type=submit]:hover {
             background-color: #818181;
         }
-
         .container {
             border-radius: 5px;
             background-color: gold;
-            padding: 20px;
         }
         .header{
             text-align: center;
@@ -81,9 +81,7 @@
         .navbar-dark .navbar-nav .nav-link:hover {
             color: goldenrod;
         }
-        #orange{
-            object-fit: fill;
-        }
+
         #select{
             background-color: #92c7c1;
         }
@@ -95,18 +93,15 @@
             background-color:#faf2a1;
             border-style: solid;
             border-color: #92c7c1;
-            -webkit-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
-            -moz-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
-            box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
+            -webkit-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.5);
+            -moz-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.5);
+            box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.5);
         }
 
         .content {
             margin: 20px;
         }
 
-        .class {
-            top: 100px;
-        }
 
     </style>
 
@@ -146,13 +141,13 @@
                 <div class="content">
                     <!--<form>-->
                     <!--<div class="dropdown">-->
-                        <!--<button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-                            <!--Select Account-->
-                        <!--</button>-->
-                        <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-                            <!--<a class="dropdown-item" href="#">Chequing Account</a>-->
-                            <!--<a class="dropdown-item" href="#">Savings Account</a>-->
-                        <!--</div>-->
+                    <!--<button id="select" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    <!--Select Account-->
+                    <!--</button>-->
+                    <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                    <!--<a class="dropdown-item" href="#">Chequing Account</a>-->
+                    <!--<a class="dropdown-item" href="#">Savings Account</a>-->
+                    <!--</div>-->
                     <!--</div>-->
                     <!--</form>-->
 
@@ -169,11 +164,11 @@
                     <form action="deposit/{{username}}" method="POST">
                         Deposits
                         <label>
-                        <select name="account">
-                            <option selected> Select a account </option>
-                            <option> checkings </option>
-                            <option> savings </option>
-                        </select>
+                            <select name="account">
+                                <option selected> Select a account </option>
+                                <option> checkings </option>
+                                <option> savings </option>
+                            </select>
 
 
                             <input type="text" name="deposit" placeholder="Deposit Amount" >
@@ -185,13 +180,11 @@
                     <form action="withdraw/{{username}}" method="POST">
                         Withdraw
                         <label>
-                        <select name="account">
-                            <option selected> Select a account </option>
-                            <option> checkings </option>
-                            <option> savings </option>
-                        </select>
-
-
+                            <select name="account">
+                                <option selected> Select a account </option>
+                                <option> checkings </option>
+                                <option> savings </option>
+                            </select>
                             <input type="text" name="withdraw" placeholder="Withdraw Amount" >
                             <input type="submit">
                         </label>

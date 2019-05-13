@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha || exit 0 ",
+    "test": "mocha || true ",
     "start": "node login_mongo.js"
   },
   "author": "Ewan Watt, Ashvan Wal, Phoung Ho",
