@@ -10,14 +10,17 @@ const crypto = require('crypto');
 const request = require('request');
 const saltRounds = 10;
 
-const clientId = "";
-const clientSecret = "";
-const accessToken = "";
-const refreshToken = "";
+
+
+const clientId = "1029651229301-joflh53096shnlrplnf6654bv2ku97pb.apps.googleusercontent.com";
+const clientSecret = "cxz4TMIpdTiuK0n2Adr6n3dc";
+const accessToken = "ya29.Glv8Bo4olL0UUFXDSKsIAvqvHToo8OpeF3SB_PLcwhNsvBi9zmqCbbyQiTW7jg4L7OvtsxYjGhDfLMIKLbqftLJGediOBChRqt3N0nEExJurs_VfKXd93M42iw93";
+const refreshToken = "1/Ke2tGXwC2gHXyVdCb67cSRYRGPa9pAD_XBee2GkENh4";
 
 var exphbs = require('express-handlebars');
 var path = require('path');
 var utils = require('./mongo_init.js');
+var db = utils.getDb();
 
 
 var app = express();
@@ -39,6 +42,153 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// app.use('/home/update/:name', (request, response, next) => {
+//
+//     var name = String(request.params.name);
+//     console.log(request.session.user.username);
+//     console.log(name);
+//     if (request.session.user.username === name) {
+//         console.log('Should work');
+//     } else if (request.session.user.username != name) {
+//         console.log('Should not work');
+//     }
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (String(request.session.user.username) != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (String(request.session.user.username) === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/update/update/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/user/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/account/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/e_transfer/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/contact/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/deposit/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/withdraw/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+
 app.get('/', function (request, response) {
 
     // var db = utils.getDb();
@@ -53,9 +203,12 @@ app.post('/auth', function (request, response) {
     var db = utils.getDb();
     var username = request.body.username;
     var password = request.body.password;
+
     if (username && password) {
         db.collection('bank').find({ username: username }).toArray(function (err, result) {
+
             let verify = bcrypt.compareSync(password, result[0].password);
+
             let confirmed = false;
             if (result[0].verified === true) {
                 confirmed = true;
@@ -99,45 +252,77 @@ app.post('/saveUser', function (request, response) {
 
     var username = request.body.username;
     var password = request.body.password;
-    var first_name = request.body.first_name;
-    var last_name = request.body.last_name;
-    var checkings = 0;
-    var savings = 0;
-    var email = request.body.email;
-    var phone_num = request.body.phone_num;
-    var token = "";
-    var tokenExpire = "";
-    var confirmToken = "";
-    var total_balance = request.body.checkings + request.body.checkings;
+    var repassword = request.body.repassword;
+    var goodPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+    if (goodPass == false) {
+        response.send('Password must be at least 8 characters long, have one uppercase letter and one lowercase letter');
+    } else if (password != repassword) {
+        response.send('Passwords must match');
+    } else {
+        password = bcrypt.hashSync(password, saltRounds);
+        var first_name = request.body.first_name;
+        var last_name = request.body.last_name;
+        var checkings = 0;
+        var savings = 0;
+        var email = request.body.email;
+        var phone_num = request.body.phone_num;
+        var token = "";
+        var tokenExpire = "";
+        var confirmToken = "";
+        var total_balance = request.body.checkings + request.body.checkings;
 
-    let create = true;
+        var db = utils.getDb();
+        let create = true;
 
-    var db = utils.getDb();
-    db.collection('bank').insertOne({
-        username: username,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-        checkings: checkings,
-        savings: savings,
-        email: email,
-        phone_num: phone_num,
-        token: token,
-        tokenExpire: tokenExpire,
-        confirmToken: confirmToken,
-        verified: false
-    }, (err, result) => {
-        if (err) {
-            create = false;
-            console.log('Unable to insert user');
-        }
-        //response.send(JSON.stringify(result.ops, undefined, 2));
-        if (create === true) {
-            response.redirect('/confirm-account');
+        db.collection('bank').find({
+            email: email
+        }).toArray(function (err, result) {
+            if (result[0] != null) {
+                response.render('basic_response.hbs', {
+                    h1: 'Email in use'
+                })
+                create = false;
+            }
+        });
+
+
+        db.collection('bank').find({
+            username: username
+        }).toArray(function (err, result) {
+            if (result[0] == null && create === true) {
+                db.collection('bank').insertOne({
+                    username: username,
+                    password: password,
+                    first_name: first_name,
+                    last_name: last_name,
+                    checkings: checkings,
+                    savings: savings,
+                    email: email,
+                    phone_num: phone_num,
+                    token: token,
+                    tokenExpire: tokenExpire,
+                    confirmToken: confirmToken,
+                    verified: false
+                }, (err, result) => {
+                    if (err) {
+                        create = false;
+                        console.log('Unable to insert user');
+                        response.send('Unable to create user');
+                    }
+                    //response.send(JSON.stringify(result.ops, undefined, 2));
+                    if (create === true) {
+                        response.redirect('/confirm-account');
+                    }
+                })
+            } else {
+                response.render('basic_response.hbs', {
+                    h1: 'Username in use'
+                });
+            }
+        });
         }
     }
-    )
-});
+);
 
 app.get('/confirm-account', function (request, response) {
 
@@ -250,7 +435,7 @@ app.post('/create-account', function (request, response) {
 
 });
 
-app.get('/confirm/:confirmToken', function(request, response) {
+app.get('/confirm/:confirmToken', function (request, response) {
 
     var db = utils.getDb();
 
@@ -265,12 +450,11 @@ app.get('/confirm/:confirmToken', function(request, response) {
                         verified: true
                     }
                 }
-            )
+            );
             response.render('basic_response.hbs', {
                 h1: 'Account Verified',
                 message: 'You are now able to log in.'
             });
-            console.log(result[0].password)
         } else {
             response.render('basic_response.hbs', {
                 h1: 'Invalid Token',
@@ -314,6 +498,15 @@ app.get('/home/update/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -353,6 +546,14 @@ app.post('/home/update/update/:name', function (request, response) {
 
 
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -427,6 +628,15 @@ app.get('/home/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -441,7 +651,7 @@ app.get('/home/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account', 'currency', 'update']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -465,13 +675,56 @@ app.get('/home/:name', function (request, response) {
 });
 
 app.get('/home/account/:name', function (request, response) {
+
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
         response.render('account_management.hbs', {
+            title: 'Home page',
+            username: docs[0].username,
+            first_name: docs[0].first_name,
+            last_name: docs[0].last_name,
+            checkings: docs[0].checkings,
+            savings: docs[0].savings,
+            email: docs[0].email,
+            phone_num: docs[0].phone_num,
+            pages: ['account_management', 'currency']
+        })
+
+    })
+});
+
+
+app.get('/home/e_transfer/:name', function (request, response) {
+
+    var db = utils.getDb();
+    var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
+            console.log('Unable to get user');
+        }
+        response.render('e_transfer.hbs', {
             title: 'Home page',
             username: docs[0].username,
             password: docs[0].password,
@@ -487,9 +740,182 @@ app.get('/home/account/:name', function (request, response) {
     })
 });
 
-app.get('/cur_calculator/:name', function(request, response) {
+app.post('/home/e_transfer/:name', function (request, response) {
+
+    var db = utils.getDb();
+    // var withdraw = request.body.withdraw;
+    var transfer = Number(request.body.transfer);
+    var email = request.body.email;
+    var e_password = request.body.e_password;
+    var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
+    response.render('thankyou.hbs', {
+        username: user_name,
+    });
+
+    db.collection('bank').insertOne({
+        e_transfer: true,
+        from: user_name,
+        to: email,
+        transfer: transfer,
+        e_password: e_password
+    });
+
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
+            console.log('Unable to get user');
+        }
+
+        var balance = docs[0].checkings;
+        var email = docs[0].email;
+
+
+        var new_balance = parseInt(balance) - parseInt(transfer);
+        db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+        response.render('thankyou.hbs', {
+            username: user_name,
+        });
+    })
+});
+
+app.get('/home/e_transfer/collect/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
+            console.log('Unable to get user');
+        }
+        response.render('e_transfer_check.hbs', {
+            title: 'Home page',
+            username: docs[0].username,
+            password: docs[0].password,
+            first_name: docs[0].first_name,
+            last_name: docs[0].last_name,
+            checkings: docs[0].checkings,
+            savings: docs[0].savings,
+            email: docs[0].email,
+            phone_num: docs[0].phone_num,
+            pages: ['account_management', 'currency']
+        })
+    })
+});
+
+
+app.post('/home/e_transfer/collect/:name', function (request, response) {
+    var db = utils.getDb();
+    var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if (err) {
+            console.log('Unable to get user');
+        }
+        var email = docs[0].email;
+
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
+            if (err) {
+                console.log('Unable to get user');
+            }
+            response.render('e_transfer_collect.hbs', {
+                username: user_name,
+                transfer: docs[0].transfer,
+                e_password: docs[0].e_password,
+                from: docs[0].from,
+                to: docs[0].to
+            })
+
+        });
+
+    });
+});
+
+app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response) {
+    var db = utils.getDb();
+    var user_name = request.params.name;
+    var password_attempt = request.body.password;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
+            console.log('Unable to get user');
+        }
+
+        var balance = docs[0].checkings;
+        var email = docs[0].email;
+
+
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
+            if (err) {
+                console.log('Unable to get user');
+            }
+
+            var e_transfer = docs[0].transfer;
+            var e_password = docs[0].e_password;
+            if (password_attempt === e_password) {
+                var new_balance = parseInt(balance) + parseInt(e_transfer);
+                db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+                db.collection('bank').deleteOne({e_transfer: true, to: email});
+                response.render('thankyou.hbs', {
+                    username: user_name,
+                });
+            }
+            else {
+                response.render('error.hbs', {
+                    username: user_name
+                })
+
+        }
+        // response.send("Thank You");
+
+        });
+    })
+});
+
+
+
+app.get('/home/cur_calculator/:name', function(request, response) {
+    var db = utils.getDb();
+    var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
             console.log('Unable to get user');
@@ -514,9 +940,17 @@ app.get('/cur_calculator/:name', function(request, response) {
 
 app.get('/home/currency/:name', function (request, response) {
 
-
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -543,6 +977,15 @@ app.get('/home/contact/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -567,18 +1010,37 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
+    var account = request.body.account;
     var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
+
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
 
-        var balance = docs[0].checkings;
-        if (Number.isInteger(deposit)) {
+
+        if (Number.isInteger(deposit) && (account === 'checkings')) {
+            var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
-            db.collection('bank').update({ username: user_name }, { $set: { checkings: new_balance } });
+            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+        }
+        else if (Number.isInteger(deposit) && (account === 'savings')) {
+            var balance = docs[0].savings;
+            var new_balance = parseInt(balance) + parseInt(deposit);
+            db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
             response.render('thankyou.hbs', {
                 username: user_name,
             });
@@ -607,7 +1069,14 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
     var currency1 = request.body.curr1;
     var currency2 = request.body.curr2;
     var user_name = request.params.name;
-    console.log(targetamount);
+
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
@@ -816,8 +1285,8 @@ app.get('/reset/:token', function (request, response) {
 app.post('/reset/:token', function (request, response) {
     var db = utils.getDb();
 
-    var password = request.body.password
-    password = bcrypt.hashSync(password, saltRounds)
+    var password = request.body.password;
+    password = bcrypt.hashSync(password, saltRounds);
 
     db.collection('bank').find({
         token: request.params.token
@@ -937,3 +1406,6 @@ app.post('/reset/:token', function (request, response) {
 // });
 //
 // //
+
+
+module.exports = app, utils, db;

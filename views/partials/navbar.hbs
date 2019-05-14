@@ -2,22 +2,38 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{title}}</title>
     <div class="sidenav">
     <a href="{{pages.[0]}}/{{username}}">Account Settings</a>
     <a href="{{pages.[1]}}/{{username}}">Withdraw/Deposit</a>
     <a href="{{pages.[2]}}/{{username}}">Account Update</a>
-        <a href="../cur_calculator/{{username}}">Currency Converter</a>
+    <a href="{{pages.[3]}}/{{username}}">Currency Converter</a>
+    <a href="{{pages.[4]}}/{{username}}">E-Transfer</a>
 
 
 
+        <ul>
+            <li>
+                <a href="{{pages.[0]}}/{{username}}">Account Settings</a>
+            </li>
+            <li>
+                <a href="{{pages.[1]}}/{{username}}">Withdraw/Deposit</a>
+            </li>
+            <li>
+                <a href="{{pages.[2]}}/{{username}}">Account Update</a>
+            </li>
+            <li>
+                <a href="{{pages.[3]}}/{{username}}">Currency Converter</a>
+            </li>
+            <li>
+                <a href="{{pages.[4]}}/{{username}}">E-Transfer</a>
+            </li>
+        </ul>
     </div>
 
 <style>
-
-body {
-            font-family: Tahoma, Geneva, sans-serif;;
-        }
 
         .sidenav {
             height: 100%;
@@ -25,36 +41,24 @@ body {
             position: fixed;
             z-index: 1;
             top: 0;
-            left: 0;
+            right: 0;
             background-color: #111;
             overflow-x: hidden;
-            padding-top: 20px;
+            padding-top: 100px;
         }
 
         .sidenav a {
             padding: 6px 6px 6px 32px;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 20px;
             color: #818181;
             display: block;
         }
 
         .sidenav a:hover {
-            color: #f1f1f1;
-            font-family: Tahoma, Geneva, sans-serif;
+            text-decoration: none;
+            color: darkorange;
+            background: rgba(250, 221, 102, 0.39);
         }
-
-        .main {
-            margin-left: 200px;
-            text-align: center;
-            margin-top: 200px;
-        }
-
-        .background {
-            background-color: purple;
-
-        }
-
-
     </style>
 </head>
