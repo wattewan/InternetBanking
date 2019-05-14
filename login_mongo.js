@@ -1135,10 +1135,6 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
             console.log('Unable to get user');
         }
 
-
-
-
-
         var currency = docs[0].currency;
         var origincurramount  = currency[currency1];
         if (typeof currency[currency2] == "undefined"){
@@ -1153,8 +1149,8 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
         if (Number.isInteger(origin) ){
             var oldcurrencyamount = parseFloat(origincurramount);
             var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
-            newoldcurrencyamount = newoldcurrencyamount.toFixed(2)
-            console.log(newoldcurrencyamount)
+            newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
+            console.log(newoldcurrencyamount);
             if (newoldcurrencyamount < 0){
                 response.render('error.hbs', {
                     username: user_name
