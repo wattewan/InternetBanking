@@ -521,7 +521,7 @@ app.get('/home/update/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account', 'currency', 'update']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
     })
 
@@ -734,7 +734,7 @@ app.get('/home/e_transfer/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -812,7 +812,7 @@ app.get('/home/e_transfer/collect/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
     })
 });
@@ -963,7 +963,7 @@ app.get('/home/currency/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -997,7 +997,7 @@ app.get('/home/contact/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency', 'contact']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -1145,7 +1145,7 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
                 savings: docs[0].savings,
                 email: docs[0].email,
                 phone_num: docs[0].phone_num,
-                pages: ['account_management', 'currency']
+                pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
             })
         }
         else {
