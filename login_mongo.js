@@ -494,6 +494,7 @@ app.get('/cur_calculator/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
+        console.log(docs[0].currency)
         response.render('cur_calculator.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -504,6 +505,7 @@ app.get('/cur_calculator/:name', function(request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
+            currency: JSON.stringify(docs[0].currency),
             pages: ['account_management', 'currency']
         })
 
@@ -520,6 +522,7 @@ app.get('/home/currency/:name', function (request, response) {
             console.log('Unable to get user');
         }
         response.render('currency.hbs', {
+
             title: 'Home page',
             username: docs[0].username,
             password: docs[0].password,
@@ -593,46 +596,85 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 });
 
 
-app.post('/home/currency/deposit/:name', function(request, response) {
-
-
-});
-
 
 app.post('/cur_calculator/convert/:name', function(request, response) {
+
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
     var origin = Number(request.body.origin);
-    var currency1 = request.body.curr1
-    var currency2 = request.body.curr2
+    var targetamount= Number(request.body.output);
+    var currency1 = request.body.curr1;
+    var currency2 = request.body.curr2;
     var user_name = request.params.name;
-
-
+    console.log(targetamount);
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
             console.log('Unable to get user');
         }
 
-        var balance = docs[0].checkings;
 
 
-        if (Number.isInteger(origin)){
-            var new_balance = parseInt(balance) + parseInt(origin);
-            db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
-            response.render('cur_calculator.hbs', {
-                title: 'Home page',
-                username: docs[0].username,
-                password: docs[0].password,
-                first_name: docs[0].first_name,
-                last_name: docs[0].last_name,
-                checkings: docs[0].checkings,
-                savings: docs[0].savings,
-                email: docs[0].email,
-                phone_num: docs[0].phone_num,
-                pages: ['account_management', 'currency']
-            })
+
+
+        var currency = docs[0].currency;
+        var origincurramount  = currency[currency1];
+        if (typeof currency[currency2] == "undefined"){
+            var target_currence_amount = 0;
+        }
+        else{
+            var target_currence_amount = currency[currency2];
+        }
+
+
+
+        if (Number.isInteger(origin) ){
+            var oldcurrencyamount = parseFloat(origincurramount);
+            var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
+            newoldcurrencyamount = newoldcurrencyamount.toFixed(2)
+            console.log(newoldcurrencyamount)
+            if (newoldcurrencyamount < 0){
+                response.render('error.hbs', {
+                    username: user_name
+                })
+            }
+
+
+
+            else{
+                targetamount = target_currence_amount + targetamount;
+
+
+                var setObject = {};
+                var unsetObject = {};
+                if (newoldcurrencyamount > 0){
+                    setObject["currency."+ currency1] = newoldcurrencyamount;
+                    setObject["currency."+ currency2] = targetamount;
+
+                }
+                else{
+                    setObject["currency."+ currency2] = targetamount;
+                    unsetObject["currency."+ currency1] = newoldcurrencyamount;
+                    db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
+                }
+
+
+                db.collection('bank').updateOne({username: user_name}, {$set: setObject});
+                response.render('thankyou.hbs', {
+                    title: 'Home page',
+                    username: docs[0].username,
+                    password: docs[0].password,
+                    first_name: docs[0].first_name,
+                    last_name: docs[0].last_name,
+                    checkings: docs[0].checkings,
+                    savings: docs[0].savings,
+                    email: docs[0].email,
+                    phone_num: docs[0].phone_num,
+                    pages: ['account_management', 'currency']
+                })
+            }
+
         }
         else {
             response.render('error.hbs', {
