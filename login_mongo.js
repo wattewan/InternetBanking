@@ -319,8 +319,8 @@ app.post('/saveUser', function (request, response) {
                 });
             }
         });
-        }
     }
+}
 );
 
 app.get('/confirm-account', function (request, response) {
@@ -638,7 +638,7 @@ app.get('/home/:name', function (request, response) {
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
-            console.log('Unable to get user'); 
+            console.log('Unable to get user');
         }
         response.render('homepage.hbs', {
             title: 'Home page',
@@ -710,7 +710,7 @@ app.get('/home/e_transfer/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
-    
+
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
     } else if (request.session.user.username != user_name) {
@@ -829,24 +829,30 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
         var email = docs[0].email;
 
-        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
+        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
             if (err) {
                 console.log('Unable to get user');
+            } else if (docs[0] == null) {
+                response.render('e_transfer_check.hbs', {
+                    title: 'E-Transfer Checking',
+                    username: user_name,
+                    pages: ['account_management', 'currency']
+                });
+            } else {
+                response.render('e_transfer_collect.hbs', {
+                    username: user_name,
+                    transfer: docs[0].transfer,
+                    e_password: docs[0].e_password,
+                    from: docs[0].from,
+                    to: docs[0].to
+                })
             }
-            response.render('e_transfer_collect.hbs', {
-                username: user_name,
-                transfer: docs[0].transfer,
-                e_password: docs[0].e_password,
-                from: docs[0].from,
-                to: docs[0].to
-            })
-
         });
 
     });
@@ -874,7 +880,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
         var email = docs[0].email;
 
 
-        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
+        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
             if (err) {
                 console.log('Unable to get user');
             }
@@ -884,7 +890,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
             if (password_attempt === e_password) {
                 var new_balance = parseInt(balance) + parseInt(e_transfer);
                 db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-                db.collection('bank').deleteOne({e_transfer: true, to: email});
+                db.collection('bank').deleteOne({ e_transfer: true, to: email });
                 response.render('thankyou.hbs', {
                     username: user_name,
                 });
@@ -894,8 +900,8 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
                     username: user_name
                 })
 
-        }
-        // response.send("Thank You");
+            }
+            // response.send("Thank You");
 
         });
     })
@@ -903,7 +909,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
 
 
 
-app.get('/home/cur_calculator/:name', function(request, response) {
+app.get('/home/cur_calculator/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
 
@@ -915,8 +921,8 @@ app.get('/home/cur_calculator/:name', function(request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
-        if(err){
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
             console.log('Unable to get user');
         }
         response.render('cur_calculator.hbs', {
@@ -1055,7 +1061,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 
 
 
-app.post('/home/currency/withdraw/:name', function(request, response) {
+app.post('/home/currency/withdraw/:name', function (request, response) {
 
     var db = utils.getDb();
     var account = request.body.account;
@@ -1063,16 +1069,16 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
     // var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
 
-    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
-        if(err){
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
             console.log('Unable to get user');
         }
-        if (Number.isInteger(parseInt(withdraw)) === false){
+        if (Number.isInteger(parseInt(withdraw)) === false) {
             response.render('error.hbs', {
                 username: user_name
             })
 
-        } else{
+        } else {
             if (account === 'savings') {
                 var balance = docs[0].savings;
                 var new_balance = parseInt(balance) - parseInt(withdraw);
@@ -1094,7 +1100,7 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
                         username: user_name
                     })
                 }
-                db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
+                db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
                 response.render('thankyou.hbs', {
                     username: user_name,
                 });
@@ -1106,7 +1112,7 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
     })
 });
 
-app.post('/cur_calculator/convert/:name', function(request, response) {
+app.post('/cur_calculator/convert/:name', function (request, response) {
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
@@ -1123,17 +1129,17 @@ app.post('/cur_calculator/convert/:name', function(request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
-        if(err){
+    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+        if (err) {
             console.log('Unable to get user');
         }
 
         var balance = docs[0].checkings;
 
 
-        if (Number.isInteger(origin)){
+        if (Number.isInteger(origin)) {
             var new_balance = parseInt(balance) + parseInt(origin);
-            db.collection('bank').update({username: user_name}, {$set: {checkings: new_balance}});
+            db.collection('bank').update({ username: user_name }, { $set: { checkings: new_balance } });
             response.render('cur_calculator.hbs', {
                 title: 'Home page',
                 username: docs[0].username,
