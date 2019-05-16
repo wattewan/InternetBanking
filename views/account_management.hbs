@@ -3,13 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Account Mangement</title>
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <a style="float:left" class="btn btn-primary btn-sm" href="/home/{{username}}" role="button">Back to Homepage</a>
+    <title>Account Management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body{
@@ -18,10 +12,6 @@
             color: black;
             background: gold;
 
-        }
-        .body-container{
-
-            min-height: 100vh;
         }
         .content-wrap{
             padding-bottom: 2rem;
@@ -66,19 +56,40 @@
         .navbar-dark .navbar-nav .nav-link:hover {
             color: goldenrod;
         }
+        .ham{
+            border: solid orange;
+            border-radius: 3px;
+        }
+        .ham button{
+            position: fixed;
+            right: 1%;
+            top: 1%;
+        }
+        .container {
+            background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
+            border-radius: 10px;
+            margin-top: 100px;
+        }
 
     </style>
+    <div class="collapse sidenav-collapse" id="sidenav">
+        {{> navbar}}
+        {{> nav_format}}
+    </div>
 </head>
 
-
-<div class="body-container">
-    <div class="content-wrap">
-        <header class="space">
-            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-                <a class="navbar-brand" href="#"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus account management</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                    <span class="navbar-toggler-icon"></span>
-                </button><!--
+<body>
+<div class="content-wrap">
+    <header class="space">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="/home/{{username}}"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus account management</a>
+            <div class="ham">
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target=".sidenav-collapse"
+                        aria-controls="sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars fa-2x"></i>
+                    <!--<i class="fa fa-times fa-2x collapse icon-collapse" id="icon"></i>-->
+                </button>
+            </div><!--
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -86,71 +97,61 @@
                 </li>
             </ul>
         </div>-->
-            </nav>
-        </header>
+        </nav>
+    </header>
+</div>
 
-    </div>
+<div class="container"  >
+    <h2> {{username}}</h2>
+    <table class="table">
 
-    <body style="background-color:yellow">
+        <tbody>
+        <tr>
+            <td>Password</td>
+            <td>********</td>
 
-    <div class="container " id = "content" style="border-radius: 20px;background-color: rgba(250,255,251,0.64);padding-top:20px;padding-bottom: 20px">
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>{{first_name}}</td>
 
+        </tr>
+        <tr>
+            <td>Last Name:</td>
+            <td>{{last_name}}</td>
 
+        </tr>
+        <tr>
+            <td>Checking Amount:</td>
+            <td>{{checkings}}</td>
 
-        <div class="container"  >
-            <h2> {{username}}</h2>
-            <table class="table">
+        </tr>
+        <tr>
+            <td>Saving Amount:</td>
+            <td>{{savings}}</td>
 
-                <tbody>
-                <tr>
-                    <td>Password</td>
-                    <td>********</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>{{email}}</td>
 
-                </tr>
-                <tr>
-                    <td>First Name</td>
-                    <td>{{first_name}}</td>
+        </tr>
 
-                </tr>
-                <tr>
-                    <td>Last Name:</td>
-                    <td>{{last_name}}</td>
+        <tr>
+            <td>Phone Number:</td>
+            <td>{{phone_num}}</td>
 
-                </tr>
-                <tr>
-                    <td>Checking Amount:</td>
-                    <td>{{checkings}}</td>
+        </tr>
 
-                </tr>
-                <tr>
-                    <td>Saving Amount:</td>
-                    <td>{{savings}}</td>
-
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td>{{email}}</td>
-
-                </tr>
-
-                <tr>
-                    <td>Phone Number:</td>
-                    <td>{{phone_num}}</td>
-
-                </tr>
-
-                </tbody>
-            </table>
-        </div>
-
-
-    </div>
-
+        </tbody>
+    </table>
+</div>
+</body>
     <footer>
         &#169;Citrus Bank 2019 - All Rights Reserved
     </footer>
 </div>
-
+<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
