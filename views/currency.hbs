@@ -16,6 +16,7 @@
             border-radius:50px;
             background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
             border-style: solid;
+            height: 450px;
         }
         .jumbotron h1, p{
             color: #4d4d4d;
@@ -47,6 +48,13 @@
         }
         .col-ms-4 button{
             background: gold;
+        }
+        .col-ms-4 input{
+            height: 100%;
+            background: wheat;
+            border: 1px solid #dddddd;
+            box-sizing:border-box;
+            border-radius: 8px;
         }
         .col-ms-4{
             margin-right: 10px;
@@ -148,8 +156,8 @@
                                 <div class="row">
                                     <div class="col-ms-4">
                                         <select class="form-control" name="account">
-                                            <option> checkings </option>
-                                            <option> savings </option>
+                                            <option> Checkings </option>
+                                            <option> Savings </option>
                                         </select>
                                     </div>
                                     <div class="col-ms-4">
@@ -166,16 +174,27 @@
                     </form>
                     <br>
                     <br>
-                    <form action="withdraw/{{username}}" method="POST">
-                        Withdraw
+                    <form class="form-group" action="withdraw/{{username}}" method="POST">
                         <label>
-                            <select name="account">
-                                <option selected> Select a account </option>
-                                <option> checkings </option>
-                                <option> savings </option>
-                            </select>
-                            <input type="text" name="withdraw" placeholder="Withdraw Amount" >
-                            <input type="submit">
+                            Withdraw
+                            <div class="dropdown">
+                                <div class="row">
+                                    <div class="col-ms-4">
+                                        <select class="form-control" name="account">
+                                            <option> Checkings </option>
+                                            <option> Savings </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-ms-4">
+                                        <input type="text" name="withdraw" placeholder="Withdraw Amount" >
+                                    </div>
+                                    <div class="col-ms-4">
+                                        <button class="btn btn-warning" type="submit">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </label>
                     </form>
                 </div>
@@ -188,7 +207,20 @@
 
 </div>
 
-<!-- <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">-->
+<!-- <img id="orange" src="https://cdn.discordapp.com/attachments/159886180207427584/575428323740614661/holding-orange-slices.jpg">
+
+<form action="withdraw/{{username}}" method="POST">
+                        Withdraw
+                        <label>
+                            <select name="account">
+                                <option selected> Select a account </option>
+                                <option> checkings </option>
+                                <option> savings </option>
+                            </select>
+                            <input type="text" name="withdraw" placeholder="Withdraw Amount" >
+                            <input type="submit">
+                        </label>
+                    </form>-->
 
 <footer>
     &#169;Citrus Bank 2019 - All Rights Reserved
