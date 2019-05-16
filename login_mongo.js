@@ -584,7 +584,7 @@ app.get('/home/account/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -839,7 +839,7 @@ app.get('/home/cur_calculator/:name', function (request, response) {
             email: docs[0].email,
             phone_num: docs[0].phone_num,
             foreign_cur: display_currencies,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -936,7 +936,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
         }
 
 
-        if (Number.isInteger(deposit) && (account === 'checkings')) {
+        if (Number.isInteger(deposit) && (account === 'Chequing')) {
             var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
@@ -944,7 +944,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
                 username: user_name,
             });
         }
-        else if (Number.isInteger(deposit) && (account === 'savings')) {
+        else if (Number.isInteger(deposit) && (account === 'Savings')) {
             var balance = docs[0].savings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
@@ -986,7 +986,7 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
             })
 
         } else {
-            if (account === 'savings') {
+            if (account === 'Savings') {
                 var balance = docs[0].savings;
                 var new_balance = parseInt(balance) - parseInt(withdraw);
                 if (new_balance < 0) {
