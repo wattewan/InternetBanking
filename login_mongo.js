@@ -614,18 +614,6 @@ app.post('/home/e_transfer/:name', function (request, response) {
         console.log('OK');
     }
 
-    response.render('thankyou.hbs', {
-        username: user_name,
-    });
-
-    db.collection('bank').insertOne({
-        e_transfer: true,
-        from: user_name,
-        to: email,
-        transfer: transfer,
-        e_password: e_password
-    });
-
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -636,10 +624,21 @@ app.post('/home/e_transfer/:name', function (request, response) {
 
 
         var new_balance = parseInt(balance) - parseInt(transfer);
-        db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-        response.render('thankyou.hbs', {
-            username: user_name,
-        });
+        if (new_balance < 0) {
+            response.send(`Cannot transfer ${transfer} from this account. Insufficient funds.`);
+        } else {
+            db.collection('bank').insertOne({
+                e_transfer: true,
+                from: user_name,
+                to: email,
+                transfer: transfer,
+                e_password: e_password
+            });
+            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+        }
     })
 });
 
@@ -973,13 +972,13 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
     })
 });
 
-app.post('/home/cur_calculator/convert/:name', function(request, response) {
+app.post('/home/cur_calculator/convert/:name', function (request, response) {
 
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
     var origin = Number(request.body.origin);
-    var targetamount= Number(request.body.output);
+    var targetamount = Number(request.body.output);
     var currency1 = request.body.curr1;
     var currency2 = request.body.curr2;
     var user_name = request.params.name;
@@ -999,22 +998,22 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
         }
 
         var currency = docs[0].currency;
-        var origincurramount  = currency[currency1];
-        if (typeof currency[currency2] == "undefined"){
+        var origincurramount = currency[currency1];
+        if (typeof currency[currency2] == "undefined") {
             var target_currence_amount = 0;
         }
-        else{
+        else {
             var target_currence_amount = currency[currency2];
         }
 
 
 
-        if (Number.isInteger(origin) ){
+        if (Number.isInteger(origin)) {
             var oldcurrencyamount = parseFloat(origincurramount);
-            var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
+            var newoldcurrencyamount = parseFloat(oldcurrencyamount) - parseFloat(origin);
             newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
             console.log(newoldcurrencyamount);
-            if (newoldcurrencyamount < 0){
+            if (newoldcurrencyamount < 0) {
                 response.render('error.hbs', {
                     username: user_name
                 })
@@ -1022,25 +1021,25 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
 
 
 
-            else{
+            else {
                 targetamount = target_currence_amount + targetamount;
 
 
                 var setObject = {};
                 var unsetObject = {};
-                if (newoldcurrencyamount > 0){
-                    setObject["currency."+ currency1] = newoldcurrencyamount;
-                    setObject["currency."+ currency2] = targetamount;
+                if (newoldcurrencyamount > 0) {
+                    setObject["currency." + currency1] = newoldcurrencyamount;
+                    setObject["currency." + currency2] = targetamount;
 
                 }
-                else{
-                    setObject["currency."+ currency2] = targetamount;
-                    unsetObject["currency."+ currency1] = newoldcurrencyamount;
-                    db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
+                else {
+                    setObject["currency." + currency2] = targetamount;
+                    unsetObject["currency." + currency1] = newoldcurrencyamount;
+                    db.collection('bank').updateOne({ username: user_name }, { $unset: unsetObject })
                 }
 
 
-                db.collection('bank').updateOne({username: user_name}, {$set: setObject});
+                db.collection('bank').updateOne({ username: user_name }, { $set: setObject });
                 response.render('thankyou.hbs', {
                     title: 'Home page',
                     username: docs[0].username,
