@@ -396,6 +396,7 @@ app.post('/home/update/update/:name', function (request, response) {
     var db = utils.getDb();
 
     var pass_word = request.body.password;
+    pass_word = bcrypt.hashSync(pass_word, saltRounds);
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
     var email = request.body.email;
