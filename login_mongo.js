@@ -29,6 +29,8 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 
 
+
+
 app.listen(port, () => {
     console.log(`Server is up on port ${port}`);
     utils.init();
@@ -641,6 +643,29 @@ app.get('/home/:name', function (request, response) {
         if (err) {
             console.log('Unable to get user');
         }
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+            console.log(for_cur);
+
+            display_currencies.push(for_cur)
+
+        }
+        console.log(display_currencies);
+
+
+
+
+
         response.render('homepage.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -651,6 +676,7 @@ app.get('/home/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
+            foreign_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
@@ -920,7 +946,25 @@ app.get('/home/cur_calculator/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
-        console.log(docs[0].currency)
+
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+
+
+            display_currencies.push(for_cur)
+
+        }
+
         response.render('cur_calculator.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -931,7 +975,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            currency: JSON.stringify(docs[0].currency),
+            foreign_cur: display_currencies,
             pages: ['account_management', 'currency']
         })
 
@@ -1071,6 +1115,8 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
+
+        var balance = docs[0].checkings;
         if (Number.isInteger(parseInt(withdraw)) === false){
             response.render('error.hbs', {
                 username: user_name
@@ -1112,7 +1158,6 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
 
 app.post('/home/cur_calculator/convert/:name', function(request, response) {
 
-
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
     var origin = Number(request.body.origin);
@@ -1123,61 +1168,86 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != user_name) {
+    } else if (request.session.user.username !== user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
-        console.log('OK');
+
     }
-    console.log(targetamount);
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
             console.log('Unable to get user');
         }
 
-        var currency = docs[0].currency;
-        var origincurramount  = currency[currency1];
-        if (typeof currency[currency2] == "undefined"){
-            var target_currence_amount = 0;
+        var balance = docs[0].checkings;
+
+        if (Number.isInteger(origin)) {
+            var new_balance = parseInt(balance) - parseInt(origin);
+
+            db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
+            console.log('done')
         }
-        else{
-            var target_currence_amount = currency[currency2];
+
+        if (docs[0].foreign_currencys === undefined) {
+            var foreign_cur = [];
+
+        }
+        else {
+            var foreign_cur = docs[0].foreign_currencys;
         }
 
+        var new_cur = {};
+        console.log(foreign_cur);
 
+        new_cur[currency2] = targetamount;
+        console.log(new_cur);
+        foreign_cur.push(new_cur);
+        console.log(foreign_cur);
 
-        if (Number.isInteger(origin) ){
-            var oldcurrencyamount = parseFloat(origincurramount);
-            var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
-            newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
-            console.log(newoldcurrencyamount);
-            if (newoldcurrencyamount < 0){
-                response.render('error.hbs', {
-                    username: user_name
-                })
-            }
+        db.collection('bank').updateOne({username: user_name}, {$set: {foreign_currencys: foreign_cur}});
 
 
 
-            else{
-                targetamount = target_currence_amount + targetamount;
+        // var origincurramount  = currency;
+        //
+        // // if (typeof currency[currency2] == "undefined"){
+        // //     var target_currence_amount = 0;
+        // // }
+        // // else{
+        // //     var target_currence_amount = currency[currency2];
+        // // }
+        //
+        //
+        // if (Number.isInteger(origin) ){
+        //     var oldcurrencyamount = parseFloat(origincurramount);
+        //     var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
+        //     newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
+        //     console.log(newoldcurrencyamount);
+        //     if (newoldcurrencyamount < 0){
+        //         response.render('error.hbs', {
+        //             username: user_name
+        //         })
+        //     }
+        //
+        //     else{
+        //         targetamount = target_currence_amount + targetamount;
+        //
+        //
+        //         var setObject = {};
+        //         var unsetObject = {};
+        //         if (newoldcurrencyamount > 0){
+        //             setObject["currency."+ currency1] = newoldcurrencyamount;
+        //             setObject["currency."+ currency2] = targetamount;
+        //
+        //         }
+        //         else{
+        //             setObject["currency."+ currency2] = targetamount;
+        //             unsetObject["currency."+ currency1] = newoldcurrencyamount;
+        //             db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
+        //         }
 
+                //db.collection('bank').updateOne({username: user_name}, {$set: setObject});
 
-                var setObject = {};
-                var unsetObject = {};
-                if (newoldcurrencyamount > 0){
-                    setObject["currency."+ currency1] = newoldcurrencyamount;
-                    setObject["currency."+ currency2] = targetamount;
-
-                }
-                else{
-                    setObject["currency."+ currency2] = targetamount;
-                    unsetObject["currency."+ currency1] = newoldcurrencyamount;
-                    db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
-                }
-
-
-                db.collection('bank').updateOne({username: user_name}, {$set: setObject});
                 response.render('thankyou.hbs', {
                     title: 'Home page',
                     username: docs[0].username,
@@ -1189,16 +1259,16 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
                     email: docs[0].email,
                     phone_num: docs[0].phone_num,
                     pages: ['account_management', 'currency']
-                })
-            }
+                });
+            //}
 
-        }
-        else {
-            response.render('error.hbs', {
-                username: user_name
-            })
-
-        }
+        //}
+        // else {
+        //     response.render('error.hbs', {
+        //         username: user_name
+        //     })
+        //
+        // }
         // response.send("Thank You");
 
 
@@ -1375,7 +1445,19 @@ app.post('/reset/:token', function (request, response) {
 //         return console.error('error: ' + err.message);
 //     }
 
-//     console.log(`Connected to the Mongo server port ${port}`);
+    //Make request to verify API
+//     messagebird.verify.verify(id, token, function(err, response ) {
+//         if(err){
+//             //Verification has failed
+//             res.render('step2', {
+//                 error: err.errors[0].description,
+//                 id: id
+//             })
+//         } else {
+//             //Verification was successful ${username}
+//             res.redirect(`/home/${user_name}`);
+//         }
+//     })
 // });
 
 
