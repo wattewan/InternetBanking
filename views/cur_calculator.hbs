@@ -3,16 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <a class="btn btn-primary btn-sm" href="/home/{{username}}" role="button">Back to Homepage</a>
+    {{> navbar}}
+    {{> nav_format}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
+        .ham{
+            border: solid orange;
+            border-radius: 3px;
+        }
+        .ham button{
+            position: fixed;
+            right: 1%;
+            top: 1%;
+        }
+        .navbar {
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: .9rem;
+            letter-spacing: .1rem;
+            background: rgba(0, 0, 0, 0.2) !important;
+        }
+        .navbar-brand img{
+            height: 3rem;
+        }
+        .navbar-nav li{
+            padding-right: .7rem;
+        }
+        .navbar-dark .navbar-nav .navbar-link {
+            color: gold;
+            padding-top: .8rem;
+        }
+        .navbar-dark .navbar-nav .nav-link.active,
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: goldenrod;
+        }
+        .jumbotron{
+            border-radius:50px;
+            background-color:gold;
+        }
+
+        footer{
+            font-size: 18px;
+            text-align: right;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2) !important;
+            opacity: 0.9;
+        }
+        body{
+            background-color: gold;
+
+        }
         .button{
 
             font-size: 30px;
             color: #111111;
-            height: 100px;
-            width:100px;
-            background-color: #ffff77;
+            height: 80px;
+            width:80px;
+            background: linear-gradient(40deg,#ffd86f, #ffbf00);
             margin-right:10px;
             margin-bottom:10px;
 
@@ -21,20 +70,29 @@
         .box {
             font-size: 40px;
             height:80px;
-            background-color: #fff5b5;
+            background: wheat;
+            border: 1px solid #dddddd;
+            box-sizing:border-box;
+            border-radius: 8px;
 
         }
 
         .input-box {
             font-size: 20px;
             height:60px;
-            background-color: #fff5b5;
+            background: wheat;
+            border: 1px solid #dddddd;
+            box-sizing:border-box;
+            border-radius: 8px;
 
         }
 
         .mytable{
             margin-top: 20px;
-            background-color: #fff5b5;
+            background: wheat;
+            border: 1px solid #dddddd;
+            box-sizing:border-box;
+            border-radius: 8px;;
 
         }
     </style>
@@ -121,7 +179,28 @@
 </head>
 <body>
 
-
+<div class="content-wrap">
+    <header class="space">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus Bank Login</a>
+            <div class="ham">
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target=".sidenav-collapse"
+                        aria-controls="sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars fa-2x"></i>
+                    <!--<i class="fa fa-times fa-2x collapse icon-collapse" id="icon"></i>-->
+                </button>
+            </div>
+            <!--
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                        </ul>
+                    </div>-->
+        </nav>
+    </header>
+</div>
 
 
 
@@ -347,7 +426,7 @@
         <div class="row">
 
             <form class="col-lg-12 row" action="convert/{{username}}" method="POST">
-                <div class="btn-group-vertical col-lg-5 ml-12 mt-12" role="group" aria-label="Basic example" style="background-color: #ffca7b;padding: 50px;border-radius:  20px 0px 0px 20px;" >
+                <div class="btn-group-vertical col-lg-5 ml-12 mt-12" role="group" aria-label="Basic example" style="background-image: linear-gradient(45deg, #93a5cf 0%, #e4efe9 100%);padding: 50px;border-radius:  20px 20px 20px 20px;border-style:solid;border-color: #eae395" >
                     <div class="btn-group">
                         <input class="box form-control col-lg-9 text-center form-control-lg mb-2"   min ='0' value="0"   name="origin" id="Amount" type="number"   aria-describedby="basic-addon1" >
 
@@ -543,15 +622,14 @@
                         <button type="button" style="border-radius: 30px" class="btn btn-outline-secondary button py-3" onclick="document.getElementById('Amount').value= Math.trunc(document.getElementById('Amount').value/10 );convertrealtime()">&lt;</button>
                         <button type="button" style="border-radius: 30px" class="btn btn-outline-warning button py-3" onclick="document.getElementById('Amount').value=document.getElementById('Amount').value + '0';convertrealtime()">0</button>
 
-                        <button onclick="convert()" style="font-size:20px; border-radius: 20px;background-color: #1b8fff"  type="button" class="btn btn-primary button py-3" data-toggle="modal" data-target="#confirm">CONFIRM   </button>
+                        <button onclick="convert()" style="font-size:20px; border-radius: 20px;background-color: #deff0d" type="button" class="btn btn-primary button py-3" data-toggle="modal" data-target="#confirm">CONFIRM   </button>
 
                     </div>
 
 
                 </div>
-                <div class="col-lg-1" style="background-color: #ffca7b"><br><br>=>></div>
 
-                <div class="col-lg-6"  style="background-color: #ffca7b;padding: 50px;border-radius: 0px 20px 20px 0px;" >
+                <div class="col-lg-6"  style="background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;padding: 50px;border-radius: 20px 20px 20px 20px; border-style:solid;border-color: #eae395" >
                     <div class="row">
 
                         <input min ='0' value="0"   name="output" id="output" placeholder="Amount" aria-describedby="basic-addon1" style="background: white;"  class="box form-control col-lg-9 text-center form-control-lg mb-2">
@@ -789,7 +867,9 @@
 
 </div>
 
-
+<footer>
+    &#169;Citrus Bank 2019 - All Rights Reserved
+</footer>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
