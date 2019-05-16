@@ -19,9 +19,6 @@ module.exports.init = function(callback) {
         // client.close();
     });
 
-<<<<<<< HEAD
-};
-=======
 };
 
 module.exports.close = () => {
@@ -35,4 +32,3 @@ module.exports.close = () => {
 
 
 
->>>>>>> b35595f1b1fe940a61c55534142afc451aaa539d
