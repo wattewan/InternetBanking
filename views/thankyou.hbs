@@ -6,9 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         @import url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);
         @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+        html, body{
+            background: linear-gradient(90deg,#ffd86f, #ffbf00)!important;
+        }
+        .jumbotron{
+            background: linear-gradient(90deg,#ffd86f, #ffbf00)!important;
+        }
+        .jumbotron button{
+            border: solid #f5da7c;
+        }
     </style>
     <link rel="stylesheet" href="https://2-22-4-dot-lead-pages.appspot.com/static/lp918/min/default_thank_you.css">
 
@@ -20,17 +30,19 @@
 
 <div class="main-content">
     <i class="fa fa-check main-content__checkmark" id="checkmark"></i>
-    <p class="main-content__body" data-lead-id="main-content-body">Your account are updated.</p>
+    <p class="main-content__body" data-lead-id="main-content-body">Your account(s) was updated.</p>
 </div>
+<div class="jumbotron">
 
-</body>
-
-<div class="jumbotron text-xs-center">
-
-
+    <button class="btn btn-warning btn-sm" role="button"><a href="/home/{{username}}">Back to Homepage</a></button>
     <p class="lead">
-        <a class="btn btn-primary btn-sm" href="/home/{{username}}" role="button">Back to Homepage</a>
+
     </p>
 </div>
+<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+</body>
 </html>
