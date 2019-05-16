@@ -1110,7 +1110,7 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
     })
 });
 
-app.post('/cur_calculator/convert/:name', function(request, response) {
+app.post('/home/cur_calculator/convert/:name', function(request, response) {
 
 
     var db = utils.getDb();
