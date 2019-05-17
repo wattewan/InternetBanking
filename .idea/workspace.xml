@@ -190,7 +190,7 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="login_mongo.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
+    <configuration name="login_mongo.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="login_mongo.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <recent_temporary>
