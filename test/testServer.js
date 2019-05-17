@@ -38,16 +38,26 @@ describe('GET Requests', function() {
                 done();
             })
     });
-    it('GET /e_transfer', function(done) {
-
-            chai.request(server)
-            .get('/home/e_transfer')
-            .end(function(err, res) {
-                res.should.have.status(200);
-                done();
-            })
-
-    })
+    // it('GET /e_transfer', function(done) {
+    //
+    //         chai.request(server)
+    //         .get('/home/e_transfer/transfers')
+    //         .end(function(err, res) {
+    //             res.should.have.status(200);
+    //             done();
+    //         })
+    //
+    // })
+    // it('GET /cur_calculator', function(done) {
+    //
+    //     chai.request(server)
+    //         .get('/home/cur_calculator/calc')
+    //         .end(function(err, res) {
+    //             res.should.have.status(200);
+    //             done();
+    //         })
+    //
+    // })
 });
 
 describe('POST Requests', function () {

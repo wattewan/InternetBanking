@@ -637,10 +637,31 @@ app.get('/home/:name', function (request, response) {
         console.log('OK');
     }
 
+
+
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
+
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+
+            display_currencies.push(for_cur)
+        }
+
+
         response.render('homepage.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -651,6 +672,7 @@ app.get('/home/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
+            foreign_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
@@ -712,13 +734,13 @@ app.get('/home/e_transfer/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
 
-    // if (!request.session.user) {
-    //     response.send('User not authorized. Please sign in.');
-    // } else if (request.session.user.username != user_name) {
-    //     response.send('Cannot view the page of another user');
-    // } else if (request.session.user.username === user_name) {
-    //     console.log('OK');
-    // }
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -910,7 +932,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != user_name) {
+    } else if (request.session.user.username !== user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
         console.log('OK');
@@ -920,7 +942,25 @@ app.get('/home/cur_calculator/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
-        console.log(docs[0].currency)
+
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+
+
+            display_currencies.push(for_cur)
+
+        }
+
         response.render('cur_calculator.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -931,7 +971,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            currency: JSON.stringify(docs[0].currency),
+            foriegn_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
@@ -1148,74 +1188,62 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
             var foreign_cur = [];
 
         }
+
         else {
             var foreign_cur = docs[0].foreign_currencys;
         }
 
-        var new_cur = {};
-        console.log(foreign_cur);
+        var num_of_cur = foreign_cur.length;
 
-        new_cur[currency2] = targetamount;
-        console.log(new_cur);
-        foreign_cur.push(new_cur);
-        console.log(foreign_cur);
+        var current_amount = 0;
 
-        db.collection('bank').updateOne({username: user_name}, {$set: {foreign_currencys: foreign_cur}});
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = foreign_cur[x];
+            if (currency2 in current_cur) {
+                current_amount = current_cur[currency2];
+                foreign_cur[x][currency2] = targetamount + current_amount;
+                console.log(foreign_cur);
+                db.collection('bank').updateOne({username: user_name}, {$set: {foreign_currencys: foreign_cur}});
+            }
+        }
 
+        if (current_amount > 0) {
+            response.render('thankyou.hbs', {
+                title: 'Home page',
+                username: docs[0].username,
+                password: docs[0].password,
+                first_name: docs[0].first_name,
+                last_name: docs[0].last_name,
+                checkings: docs[0].checkings,
+                savings: docs[0].savings,
+                email: docs[0].email,
+                phone_num: docs[0].phone_num,
+                pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
+            })
+        }
+        else {
+            var new_cur = {};
+            console.log(foreign_cur);
+            new_cur[currency2] = targetamount + current_amount;
+            console.log(new_cur);
+            foreign_cur.push(new_cur);
+            console.log(foreign_cur);
 
+            db.collection('bank').updateOne({username: user_name}, {$set: {foreign_currencys: foreign_cur}});
 
-        // var origincurramount  = currency;
-        //
-        // // if (typeof currency[currency2] == "undefined"){
-        // //     var target_currence_amount = 0;
-        // // }
-        // // else{
-        // //     var target_currence_amount = currency[currency2];
-        // // }
-        //
-        //
-        // if (Number.isInteger(origin) ){
-        //     var oldcurrencyamount = parseFloat(origincurramount);
-        //     var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
-        //     newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
-        //     console.log(newoldcurrencyamount);
-        //     if (newoldcurrencyamount < 0){
-        //         response.render('error.hbs', {
-        //             username: user_name
-        //         })
-        //     }
-        //
-        //     else{
-        //         targetamount = target_currence_amount + targetamount;
-        //
-        //
-        //         var setObject = {};
-        //         var unsetObject = {};
-        //         if (newoldcurrencyamount > 0){
-        //             setObject["currency."+ currency1] = newoldcurrencyamount;
-        //             setObject["currency."+ currency2] = targetamount;
-        //
-        //         }
-        //         else{
-        //             setObject["currency."+ currency2] = targetamount;
-        //             unsetObject["currency."+ currency1] = newoldcurrencyamount;
-        //             db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
-        //         }
-
-                //db.collection('bank').updateOne({username: user_name}, {$set: setObject});
-
-                response.render('thankyou.hbs', {
-                    title: 'Home page',
-                    username: docs[0].username,
-                    password: docs[0].password,
-                    first_name: docs[0].first_name,
-                    last_name: docs[0].last_name,
-                    checkings: docs[0].checkings,
-                    savings: docs[0].savings,
-                    email: docs[0].email,
-                    phone_num: docs[0].phone_num,
-                    pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
-                })
+            response.render('thankyou.hbs', {
+                title: 'Home page',
+                username: docs[0].username,
+                password: docs[0].password,
+                first_name: docs[0].first_name,
+                last_name: docs[0].last_name,
+                checkings: docs[0].checkings,
+                savings: docs[0].savings,
+                email: docs[0].email,
+                phone_num: docs[0].phone_num,
+                pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
+            })
+        }
 
     })
 });
