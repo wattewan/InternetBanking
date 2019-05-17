@@ -700,7 +700,7 @@ app.get('/home/account/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -932,7 +932,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
             email: docs[0].email,
             phone_num: docs[0].phone_num,
             currency: JSON.stringify(docs[0].currency),
-            pages: ['account_management', 'currency']
+            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
     })
@@ -1187,7 +1187,7 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
                     savings: docs[0].savings,
                     email: docs[0].email,
                     phone_num: docs[0].phone_num,
-                    pages: ['account_management', 'currency']
+                    pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
                 })
             }
 
