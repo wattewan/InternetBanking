@@ -2,8 +2,6 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    {{> navbar}}
-    {{> nav_format}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style>
@@ -14,12 +12,13 @@
         }
         .jumbotron{
             border-radius:50px;
-            background-color:#faf2a1;
+            background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
             border-style: solid;
             border-color:#92c7c1;
             -webkit-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
             -moz-box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
             box-shadow: -11px -5px 20px -4px rgba(0,0,0,0.75);
+            margin-top: 150px;
         }
         .jumbotron h1, p{
             color: #4d4d4d;
@@ -36,6 +35,16 @@
         body{
             background-color:gold;
         }
+        .ham{
+            border: solid orange;
+            border-radius: 3px;
+        }
+        .ham button{
+            position: fixed;
+            right: 1%;
+            top: 1%;
+            background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
+        }
         .navbar {
             text-transform: uppercase;
             font-weight: 700;
@@ -44,7 +53,7 @@
             background: rgba(0, 0, 0, 0.2) !important;
         }
         .navbar-brand img{
-            height: 2rem;
+            height: 3rem;
         }
         .navbar-nav li{
             padding-right: .7rem;
@@ -57,8 +66,15 @@
         .navbar-dark .navbar-nav .nav-link:hover {
             color: goldenrod;
         }
-        button[type="submit"],
-        button[type="button"] {
+        .label input[type="password"],
+        .label input[type="text"] {
+            width: 90%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing:border-box;
+        }
+        button[type="submit"] {
             width: 90%;
             padding: 15px;
             margin-bottom: 5px;
@@ -78,23 +94,24 @@
             color: #4d4d4d;
         }
     </style>
+    <div class="collapse sidenav-collapse" id="sidenav">
+        {{> navbar}}
+        {{> nav_format}}
+    </div>
 </head>
 <body>
 
 <div class="content-wrap">
     <header class="space">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <a class="navbar-brand" href="#"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus Bank Login</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button><!--
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-            </ul>
-        </div>-->
+            <a class="navbar-brand" href="/home/{{username}}"><img src="https://cdn.discordapp.com/attachments/159886180207427584/573241269548220446/orange.PNG" alt=""> Citrus Bank Login</a>
+            <div class="ham">
+                <button class="btn btn-warning" type="button" data-toggle="collapse" data-target=".sidenav-collapse"
+                        aria-controls="sidenav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars fa-2x"></i>
+                    <!--<i class="fa fa-times fa-2x collapse icon-collapse" id="icon"></i>-->
+                </button>
+            </div>
         </nav>
     </header>
 </div>
@@ -131,6 +148,7 @@
     &#169;Citrus Bank 2019 - All Rights Reserved
 </footer>
 
+<script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
