@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cdb18aa-0260-4d69-9fbe-bce8bc218e12" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/account_management.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/account_management.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/currency.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/currency.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/e_transfer.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/e_transfer.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/e_transfer_check.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/e_transfer_check.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/e_transfer_collect.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/e_transfer_collect.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/navbar.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/navbar.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/update.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/update.hbs" afterDir="false" />
-    </list>
+    <list default="true" id="4cdb18aa-0260-4d69-9fbe-bce8bc218e12" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,8 +44,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/e_transfer.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+            <state relative-caret-position="68">
+              <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -190,12 +181,12 @@
       <workItem from="1557517251600" duration="3472000" />
       <workItem from="1557781003190" duration="3752000" />
       <workItem from="1557866750078" duration="2386000" />
-      <workItem from="1558040244061" duration="8968000" />
+      <workItem from="1558040244061" duration="9142000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18578000" />
+    <option name="totallyTimeSpent" value="18752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
@@ -334,8 +325,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/e_transfer.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+        <state relative-caret-position="68">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
         </state>
       </provider>
     </entry>
