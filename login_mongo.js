@@ -637,10 +637,31 @@ app.get('/home/:name', function (request, response) {
         console.log('OK');
     }
 
+
+
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
+
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+
+            display_currencies.push(for_cur)
+        }
+
+
         response.render('homepage.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -651,6 +672,7 @@ app.get('/home/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
+            foreign_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
@@ -712,13 +734,13 @@ app.get('/home/e_transfer/:name', function (request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
 
-    // if (!request.session.user) {
-    //     response.send('User not authorized. Please sign in.');
-    // } else if (request.session.user.username != user_name) {
-    //     response.send('Cannot view the page of another user');
-    // } else if (request.session.user.username === user_name) {
-    //     console.log('OK');
-    // }
+    if (!request.session.user) {
+        response.send('User not authorized. Please sign in.');
+    } else if (request.session.user.username != user_name) {
+        response.send('Cannot view the page of another user');
+    } else if (request.session.user.username === user_name) {
+        console.log('OK');
+    }
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -910,7 +932,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != user_name) {
+    } else if (request.session.user.username !== user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
         console.log('OK');
@@ -920,7 +942,25 @@ app.get('/home/cur_calculator/:name', function(request, response) {
         if(err){
             console.log('Unable to get user');
         }
-        console.log(docs[0].currency)
+
+        var currencies = docs[0].foreign_currencys;
+
+        var num_of_cur = currencies.length;
+        var display_currencies = [];
+
+        for (var x = 0; x < num_of_cur; x++) {
+            var current_cur = currencies[x];
+            var code = String(Object.keys(current_cur));
+
+            var amount = String(Object.values(current_cur));
+
+            var for_cur = code + ': ' + amount;
+
+
+            display_currencies.push(for_cur)
+
+        }
+
         response.render('cur_calculator.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -931,7 +971,7 @@ app.get('/home/cur_calculator/:name', function(request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            currency: JSON.stringify(docs[0].currency),
+            foriegn_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
