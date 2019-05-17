@@ -711,7 +711,7 @@ app.get('/home/e_transfer/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
-    
+
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
     } else if (request.session.user.username != user_name) {
@@ -1128,7 +1128,6 @@ app.post('/home/cur_calculator/convert/:name', function(request, response) {
     } else if (request.session.user.username === user_name) {
         console.log('OK');
     }
-    console.log(targetamount);
 
     db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if(err){
