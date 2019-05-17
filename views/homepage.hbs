@@ -16,15 +16,11 @@
         }
         .jumbotron{
             border-radius:50px;
+            background: linear-gradient(40deg,#ffd86f, #ffbf00)!important;
             border-style: solid;
-            border-color: #eae395;
-            background: linear-gradient(40deg,#ffd86f, #ffbf00);
-
-
         }
         .jumbotron h1, p{
             color: #4d4d4d;
-            font-weight:bold;
         }
         body{
             background-color:gold;
@@ -104,7 +100,6 @@
         <h1 class="display-4">Welcome Back {{first_name}}</h1>
         <p class="lead">Checking Account: {{checkings}} </p>
         <p class="lead">Savings Account: {{savings}}</p>
-<p class="lead">Foreign Currencies:{{#each foreign_cur}} {{this}} {{/each}}</p>
     </div>
     <div class="row no-gutters">
         <div class="col-md-4">

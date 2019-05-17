@@ -62,29 +62,20 @@
         .box {
             font-size: 40px;
             height:80px;
-            background: wheat;
-            border: 1px solid #dddddd;
-            box-sizing:border-box;
-            border-radius: 8px;
+            background-color: #fff5b5;
 
         }
 
         .input-box {
             font-size: 20px;
             height:60px;
-            background: wheat;
-            border: 1px solid #dddddd;
-            box-sizing:border-box;
-            border-radius: 8px;
+            background-color: #fff5b5;
 
         }
 
         .mytable{
             margin-top: 20px;
-            background: wheat;
-            border: 1px solid #dddddd;
-            box-sizing:border-box;
-            border-radius: 8px;;
+            background-color: #fff5b5;
 
         }
         button{
@@ -582,7 +573,12 @@
                                 <!--<a class="btn btn-primary" data-toggle="collapse" href="#currency" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"> Currency</a>-->
 
                                 <!--<div class="collapse multi-collapse" id="curre2ncy">-->
-                                {{#each foreign_cur}} {{this}} {{/each}}
+                                    {{currency}}
+
+                                    {{#each currency}}
+                                        {{@key}}:{{@value}}!
+
+                                    {{/each}}
 
                                 <!--</div>-->
                             </td>
@@ -609,9 +605,7 @@
     </div>
 </div>
 
-<footer>
-    &#169;Citrus Bank 2019 - All Rights Reserved
-</footer>
+
 
 
 <script src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"></script>

@@ -11,10 +11,11 @@ const request = require('request');
 const saltRounds = 10;
 
 
-const clientId = ""
-const clientSecret = ""
-const accessToken = ""
-const refreshToken = ""
+
+const clientId = "1029651229301-joflh53096shnlrplnf6654bv2ku97pb.apps.googleusercontent.com";
+const clientSecret = "cxz4TMIpdTiuK0n2Adr6n3dc";
+const accessToken = "ya29.Glv8Bo4olL0UUFXDSKsIAvqvHToo8OpeF3SB_PLcwhNsvBi9zmqCbbyQiTW7jg4L7OvtsxYjGhDfLMIKLbqftLJGediOBChRqt3N0nEExJurs_VfKXd93M42iw93";
+const refreshToken = "1/Ke2tGXwC2gHXyVdCb67cSRYRGPa9pAD_XBee2GkENh4";
 
 var exphbs = require('express-handlebars');
 var path = require('path');
@@ -26,8 +27,6 @@ var app = express();
 
 app.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/partials');
-
-
 
 
 app.listen(port, () => {
@@ -43,10 +42,152 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.all('/logout', (request, response) => {
-    request.session.destroy();
-    response.redirect('/');
-});
+// app.use('/home/update/:name', (request, response, next) => {
+//
+//     var name = String(request.params.name);
+//     console.log(request.session.user.username);
+//     console.log(name);
+//     if (request.session.user.username === name) {
+//         console.log('Should work');
+//     } else if (request.session.user.username != name) {
+//         console.log('Should not work');
+//     }
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (String(request.session.user.username) != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (String(request.session.user.username) === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/update/update/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/user/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/account/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/e_transfer/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/contact/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/deposit/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
+//
+// app.use('/home/currency/withdraw/:name', (request, response, next) => {
+//
+//     var name = request.params.name;
+//
+//     if (!request.session.user) {
+//         response.send('User not authorized. Please sign in.');
+//     } else if (request.session.user.username != name) {
+//         response.send('Cannot view the page of another user');
+//     } else if (request.session.user.username === name) {
+//         next();
+//     }
+//
+// });
 
 app.get('/', function (request, response) {
 
@@ -179,8 +320,8 @@ app.post('/saveUser', function (request, response) {
                 });
             }
         });
+        }
     }
-}
 );
 
 app.get('/confirm-account', function (request, response) {
@@ -398,7 +539,6 @@ app.post('/home/update/update/:name', function (request, response) {
     var db = utils.getDb();
 
     var pass_word = request.body.password;
-    pass_word = bcrypt.hashSync(pass_word, saltRounds);
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
     var email = request.body.email;
@@ -501,29 +641,6 @@ app.get('/home/:name', function (request, response) {
         if (err) {
             console.log('Unable to get user');
         }
-        var currencies = docs[0].foreign_currencys;
-
-        var num_of_cur = currencies.length;
-        var display_currencies = [];
-
-        for (var x = 0; x < num_of_cur; x++) {
-            var current_cur = currencies[x];
-            var code = String(Object.keys(current_cur));
-
-            var amount = String(Object.values(current_cur));
-
-            var for_cur = code + ': ' + amount;
-            console.log(for_cur);
-
-            display_currencies.push(for_cur)
-
-        }
-        console.log(display_currencies);
-
-
-
-
-
         response.render('homepage.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -534,7 +651,6 @@ app.get('/home/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            foreign_cur: display_currencies,
             pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
         })
 
@@ -584,7 +700,7 @@ app.get('/home/account/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
+            pages: ['account_management', 'currency']
         })
 
     })
@@ -595,7 +711,7 @@ app.get('/home/e_transfer/:name', function (request, response) {
 
     var db = utils.getDb();
     var user_name = request.params.name;
-
+    
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
     } else if (request.session.user.username != user_name) {
@@ -641,6 +757,18 @@ app.post('/home/e_transfer/:name', function (request, response) {
         console.log('OK');
     }
 
+    response.render('thankyou.hbs', {
+        username: user_name,
+    });
+
+    db.collection('bank').insertOne({
+        e_transfer: true,
+        from: user_name,
+        to: email,
+        transfer: transfer,
+        e_password: e_password
+    });
+
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
@@ -651,21 +779,10 @@ app.post('/home/e_transfer/:name', function (request, response) {
 
 
         var new_balance = parseInt(balance) - parseInt(transfer);
-        if (new_balance < 0) {
-            response.send(`Cannot transfer ${transfer} from this account. Insufficient funds.`);
-        } else {
-            db.collection('bank').insertOne({
-                e_transfer: true,
-                from: user_name,
-                to: email,
-                transfer: transfer,
-                e_password: e_password
-            });
-            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-            response.render('thankyou.hbs', {
-                username: user_name,
-            });
-        }
+        db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+        response.render('thankyou.hbs', {
+            username: user_name,
+        });
     })
 });
 
@@ -713,30 +830,24 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
         var email = docs[0].email;
 
-        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
             if (err) {
                 console.log('Unable to get user');
-            } else if (docs[0] == null) {
-                response.render('e_transfer_check.hbs', {
-                    title: 'E-Transfer Checking',
-                    username: user_name,
-                    pages: ['account_management', 'currency']
-                });
-            } else {
-                response.render('e_transfer_collect.hbs', {
-                    username: user_name,
-                    transfer: docs[0].transfer,
-                    e_password: docs[0].e_password,
-                    from: docs[0].from,
-                    to: docs[0].to
-                })
             }
+            response.render('e_transfer_collect.hbs', {
+                username: user_name,
+                transfer: docs[0].transfer,
+                e_password: docs[0].e_password,
+                from: docs[0].from,
+                to: docs[0].to
+            })
+
         });
 
     });
@@ -764,7 +875,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
         var email = docs[0].email;
 
 
-        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
             if (err) {
                 console.log('Unable to get user');
             }
@@ -774,7 +885,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
             if (password_attempt === e_password) {
                 var new_balance = parseInt(balance) + parseInt(e_transfer);
                 db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-                db.collection('bank').deleteOne({ e_transfer: true, to: email });
+                db.collection('bank').deleteOne({e_transfer: true, to: email});
                 response.render('thankyou.hbs', {
                     username: user_name,
                 });
@@ -784,8 +895,8 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
                     username: user_name
                 })
 
-            }
-            // response.send("Thank You");
+        }
+        // response.send("Thank You");
 
         });
     })
@@ -793,7 +904,7 @@ app.post('/home/e_transfer/collect/e_deposit/:name', function (request, response
 
 
 
-app.get('/home/cur_calculator/:name', function (request, response) {
+app.get('/home/cur_calculator/:name', function(request, response) {
     var db = utils.getDb();
     var user_name = request.params.name;
 
@@ -805,29 +916,11 @@ app.get('/home/cur_calculator/:name', function (request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
-        if (err) {
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
             console.log('Unable to get user');
         }
-
-        var currencies = docs[0].foreign_currencys;
-
-        var num_of_cur = currencies.length;
-        var display_currencies = [];
-
-        for (var x = 0; x < num_of_cur; x++) {
-            var current_cur = currencies[x];
-            var code = String(Object.keys(current_cur));
-
-            var amount = String(Object.values(current_cur));
-
-            var for_cur = code + ': ' + amount;
-
-
-            display_currencies.push(for_cur)
-
-        }
-
+        console.log(docs[0].currency)
         response.render('cur_calculator.hbs', {
             title: 'Home page',
             username: docs[0].username,
@@ -838,8 +931,8 @@ app.get('/home/cur_calculator/:name', function (request, response) {
             savings: docs[0].savings,
             email: docs[0].email,
             phone_num: docs[0].phone_num,
-            foreign_cur: display_currencies,
-            pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
+            currency: JSON.stringify(docs[0].currency),
+            pages: ['account_management', 'currency']
         })
 
     })
@@ -936,7 +1029,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
         }
 
 
-        if (Number.isInteger(deposit) && (account === 'Chequing')) {
+        if (Number.isInteger(deposit) && (account === 'checkings')) {
             var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
@@ -944,7 +1037,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
                 username: user_name,
             });
         }
-        else if (Number.isInteger(deposit) && (account === 'Savings')) {
+        else if (Number.isInteger(deposit) && (account === 'savings')) {
             var balance = docs[0].savings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
@@ -966,7 +1059,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
 
 
 
-app.post('/home/currency/withdraw/:name', function (request, response) {
+app.post('/home/currency/withdraw/:name', function(request, response) {
 
     var db = utils.getDb();
     var account = request.body.account;
@@ -974,19 +1067,17 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
     // var deposit = Number(request.body.deposit);
     var user_name = request.params.name;
 
-    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
-        if (err) {
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
             console.log('Unable to get user');
         }
-
-        var balance = docs[0].checkings;
         if (Number.isInteger(parseInt(withdraw)) === false){
             response.render('error.hbs', {
                 username: user_name
             })
 
-        } else {
-            if (account === 'Savings') {
+        } else{
+            if (account === 'savings') {
                 var balance = docs[0].savings;
                 var new_balance = parseInt(balance) - parseInt(withdraw);
                 if (new_balance < 0) {
@@ -1007,7 +1098,7 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
                         username: user_name
                     })
                 }
-                db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+                db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
                 response.render('thankyou.hbs', {
                     username: user_name,
                 });
@@ -1019,98 +1110,74 @@ app.post('/home/currency/withdraw/:name', function (request, response) {
     })
 });
 
-app.post('/home/cur_calculator/convert/:name', function (request, response) {
+app.post('/home/cur_calculator/convert/:name', function(request, response) {
+
 
     var db = utils.getDb();
     // var withdraw = request.body.withdraw;
     var origin = Number(request.body.origin);
-    var targetamount = Number(request.body.output);
+    var targetamount= Number(request.body.output);
     var currency1 = request.body.curr1;
     var currency2 = request.body.curr2;
     var user_name = request.params.name;
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username !== user_name) {
+    } else if (request.session.user.username != user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
-
+        console.log('OK');
     }
+    console.log(targetamount);
 
-    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
-        if (err) {
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
+        if(err){
             console.log('Unable to get user');
         }
 
-        var balance = docs[0].checkings;
-
-        if (Number.isInteger(origin)) {
-            var new_balance = parseInt(balance) - parseInt(origin);
-
-            db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
-            console.log('done')
+        var currency = docs[0].currency;
+        var origincurramount  = currency[currency1];
+        if (typeof currency[currency2] == "undefined"){
+            var target_currence_amount = 0;
+        }
+        else{
+            var target_currence_amount = currency[currency2];
         }
 
-        if (docs[0].foreign_currencys === undefined) {
-            var foreign_cur = [];
 
-        }
-        else {
-            var foreign_cur = docs[0].foreign_currencys;
-        }
 
-        var new_cur = {};
-        console.log(foreign_cur);
-
-        new_cur[currency2] = targetamount;
-        console.log(new_cur);
-        foreign_cur.push(new_cur);
-        console.log(foreign_cur);
-
-        db.collection('bank').updateOne({username: user_name}, {$set: {foreign_currencys: foreign_cur}});
+        if (Number.isInteger(origin) ){
+            var oldcurrencyamount = parseFloat(origincurramount);
+            var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
+            newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
+            console.log(newoldcurrencyamount);
+            if (newoldcurrencyamount < 0){
+                response.render('error.hbs', {
+                    username: user_name
+                })
+            }
 
 
 
-        // var origincurramount  = currency;
-        //
-        // // if (typeof currency[currency2] == "undefined"){
-        // //     var target_currence_amount = 0;
-        // // }
-        // // else{
-        // //     var target_currence_amount = currency[currency2];
-        // // }
-        //
-        //
-        // if (Number.isInteger(origin) ){
-        //     var oldcurrencyamount = parseFloat(origincurramount);
-        //     var newoldcurrencyamount  = parseFloat(oldcurrencyamount) - parseFloat(origin);
-        //     newoldcurrencyamount = newoldcurrencyamount.toFixed(2);
-        //     console.log(newoldcurrencyamount);
-        //     if (newoldcurrencyamount < 0){
-        //         response.render('error.hbs', {
-        //             username: user_name
-        //         })
-        //     }
-        //
-        //     else{
-        //         targetamount = target_currence_amount + targetamount;
-        //
-        //
-        //         var setObject = {};
-        //         var unsetObject = {};
-        //         if (newoldcurrencyamount > 0){
-        //             setObject["currency."+ currency1] = newoldcurrencyamount;
-        //             setObject["currency."+ currency2] = targetamount;
-        //
-        //         }
-        //         else{
-        //             setObject["currency."+ currency2] = targetamount;
-        //             unsetObject["currency."+ currency1] = newoldcurrencyamount;
-        //             db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
-        //         }
+            else{
+                targetamount = target_currence_amount + targetamount;
 
-                //db.collection('bank').updateOne({username: user_name}, {$set: setObject});
 
+                var setObject = {};
+                var unsetObject = {};
+                if (newoldcurrencyamount > 0){
+                    setObject["currency."+ currency1] = newoldcurrencyamount;
+                    setObject["currency."+ currency2] = targetamount;
+
+                }
+                else{
+                    setObject["currency."+ currency2] = targetamount;
+                    unsetObject["currency."+ currency1] = newoldcurrencyamount;
+                    db.collection('bank').updateOne({username:user_name},{$unset: unsetObject })
+                }
+
+
+                db.collection('bank').updateOne({username: user_name}, {$set: setObject});
                 response.render('thankyou.hbs', {
                     title: 'Home page',
                     username: docs[0].username,
@@ -1122,16 +1189,16 @@ app.post('/home/cur_calculator/convert/:name', function (request, response) {
                     email: docs[0].email,
                     phone_num: docs[0].phone_num,
                     pages: ['account_management', 'currency']
-                });
-            //}
+                })
+            }
 
-        //}
-        // else {
-        //     response.render('error.hbs', {
-        //         username: user_name
-        //     })
-        //
-        // }
+        }
+        else {
+            response.render('error.hbs', {
+                username: user_name
+            })
+
+        }
         // response.send("Thank You");
 
 
@@ -1308,19 +1375,7 @@ app.post('/reset/:token', function (request, response) {
 //         return console.error('error: ' + err.message);
 //     }
 
-    //Make request to verify API
-//     messagebird.verify.verify(id, token, function(err, response ) {
-//         if(err){
-//             //Verification has failed
-//             res.render('step2', {
-//                 error: err.errors[0].description,
-//                 id: id
-//             })
-//         } else {
-//             //Verification was successful ${username}
-//             res.redirect(`/home/${user_name}`);
-//         }
-//     })
+//     console.log(`Connected to the Mongo server port ${port}`);
 // });
 
 
