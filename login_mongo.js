@@ -280,7 +280,7 @@ app.post('/saveUser', function (request, response) {
             if (result[0] != null) {
                 response.render('basic_response.hbs', {
                     h1: 'Email in use'
-                })
+                });
                 create = false;
             }
         });
@@ -401,7 +401,7 @@ app.post('/create-account', function (request, response) {
                     from: 'internetbanking.node@gmail.com',
                     subject: 'Account Creation Confirmation',
                     text: 'Click the following link to confirm your account and complete your registration. \n' +
-                        'localhost:8080' + '/confirm/' + request.session.user.confirmToken,
+                        port + '/confirm/' + request.session.user.confirmToken,
                     auth: {
                         user: 'internetbanking.node@gmail.com',
                         refreshToken: refreshToken,
