@@ -736,7 +736,7 @@ app.get('/home/e_transfer/:name', function (request, response) {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != user_name) {
+    } else if (request.session.user.username !== user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
         console.log('OK');
@@ -773,23 +773,11 @@ app.post('/home/e_transfer/:name', function (request, response) {
 
     if (!request.session.user) {
         response.send('User not authorized. Please sign in.');
-    } else if (request.session.user.username != user_name) {
+    } else if (request.session.user.username !== user_name) {
         response.send('Cannot view the page of another user');
     } else if (request.session.user.username === user_name) {
         console.log('OK');
     }
-
-    response.render('thankyou.hbs', {
-        username: user_name,
-    });
-
-    db.collection('bank').insertOne({
-        e_transfer: true,
-        from: user_name,
-        to: email,
-        transfer: transfer,
-        e_password: e_password
-    });
 
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
@@ -799,13 +787,39 @@ app.post('/home/e_transfer/:name', function (request, response) {
         var balance = docs[0].checkings;
         var email = docs[0].email;
 
+        if (transfer > balance) {
+            response.render('error.hbs', {
+                username: user_name,
+            });
+        }
+        else {
 
-        var new_balance = parseInt(balance) - parseInt(transfer);
-        db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-        response.render('thankyou.hbs', {
-            username: user_name,
-        });
-    })
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+
+            db.collection('bank').insertOne({
+                e_transfer: true,
+                from: user_name,
+                to: email,
+                transfer: transfer,
+                e_password: e_password
+            });
+
+
+            var new_balance = parseInt(balance) - parseInt(transfer);
+            db.collection('bank').updateOne({username: user_name}, {$set: {checkings: new_balance}});
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+        }
+    });
+
+
+
+
+
+
 });
 
 app.get('/home/e_transfer/collect/:name', function (request, response) {
