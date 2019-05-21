@@ -921,24 +921,23 @@ app.post('/home/currency/deposit/:name', function (request, response) {
             console.log('Unable to get user');
         }
 
-
-        if (Number.isInteger(deposit) && (account === 'checkings')) {
+        if (Number.isInteger(deposit) && (account === 'Checkings')) {
             var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
             response.render('thankyou.hbs', {
                 username: user_name,
             });
-        }
-        else if (Number.isInteger(deposit) && (account === 'savings')) {
+        } else if (Number.isInteger(deposit) && (account === 'Savings')) {
             var balance = docs[0].savings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
             response.render('thankyou.hbs', {
                 username: user_name,
             });
-        }
-        else {
+        } else {
+            console.log(deposit);
+            console.log(account);
             response.render('error.hbs', {
                 username: user_name
             })
