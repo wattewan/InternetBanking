@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c5e5b46-1004-4209-8799-8fd8e7a1220f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0c5e5b46-1004-4209-8799-8fd8e7a1220f" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -28,13 +26,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="hbs" value="1" />
-          <entry key="js" value="443" />
+          <entry key="js" value="445" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Handlebars/Mustache" value="1" />
-          <entry key="JavaScript" value="443" />
+          <entry key="JavaScript" value="445" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -52,8 +50,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/login_mongo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1197">
-              <caret line="1211" column="35" selection-start-line="1211" selection-start-column="35" selection-end-line="1211" selection-end-column="35" />
+            <state relative-caret-position="92">
+              <caret line="1074" column="83" selection-start-line="1074" selection-start-column="83" selection-end-line="1074" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -151,7 +149,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-15" />
     <option name="y" value="-15" />
     <option name="width" value="1950" />
@@ -228,15 +226,15 @@
       <workItem from="1557866750078" duration="2386000" />
       <workItem from="1558110939972" duration="523000" />
       <workItem from="1558471152957" duration="43000" />
-      <workItem from="1558473707705" duration="509000" />
+      <workItem from="1558473707705" duration="976000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5994000" />
+    <option name="totallyTimeSpent" value="6461000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15719947" />
@@ -295,8 +293,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/login_mongo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1197">
-          <caret line="1211" column="35" selection-start-line="1211" selection-start-column="35" selection-end-line="1211" selection-end-column="35" />
+        <state relative-caret-position="92">
+          <caret line="1074" column="83" selection-start-line="1074" selection-start-column="83" selection-end-line="1074" selection-end-column="83" />
         </state>
       </provider>
     </entry>
