@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/views/e_transfer.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/e_transfer.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/thankyou.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/thankyou.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +25,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="hbs" value="1" />
+          <entry key="hbs" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Handlebars/Mustache" value="1" />
+          <entry key="Handlebars/Mustache" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -40,13 +40,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login_mongo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
+            <state relative-caret-position="-119">
               <caret line="800" column="45" lean-forward="true" selection-start-line="800" selection-start-column="45" selection-end-line="800" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/thankyou.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/e_transfer.hbs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
@@ -101,6 +110,7 @@
       <list>
         <option value="$PROJECT_DIR$/login_mongo.js" />
         <option value="$PROJECT_DIR$/views/e_transfer.hbs" />
+        <option value="$PROJECT_DIR$/views/thankyou.hbs" />
       </list>
     </option>
   </component>
@@ -114,6 +124,11 @@
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1905" />
+    <option name="width" value="1948" />
+    <option name="height" value="2075" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -187,7 +202,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="680000" />
+    <option name="totallyTimeSpent" value="932000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
@@ -242,13 +257,6 @@
         <state relative-caret-position="-1887" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/login_mongo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="800" column="45" lean-forward="true" selection-start-line="800" selection-start-column="45" selection-end-line="800" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/currency.hbs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -280,6 +288,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="120" column="3" lean-forward="true" selection-start-line="120" selection-start-column="3" selection-end-line="120" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login_mongo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="800" column="45" lean-forward="true" selection-start-line="800" selection-start-column="45" selection-end-line="800" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/thankyou.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="28" column="16" lean-forward="true" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
         </state>
       </provider>
     </entry>
