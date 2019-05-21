@@ -722,20 +722,31 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
         }
         var email = docs[0].email;
 
-        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, result) => {
             if (err) {
                 console.log('Unable to get user');
             }
-            if (!docs[0]) {
-                response.render('e_transfer_check.hbs');
+            if (!result[0]) {
+                response.render('e_transfer_check.hbs', {
+                    title: 'Home page',
+                    username: docs[0].username,
+                    password: docs[0].password,
+                    first_name: docs[0].first_name,
+                    last_name: docs[0].last_name,
+                    checkings: docs[0].checkings,
+                    savings: docs[0].savings,
+                    email: docs[0].email,
+                    phone_num: docs[0].phone_num,
+                    pages: ['account', 'currency', 'update', 'cur_calculator', 'e_transfer', 'collect']
+                })
             } else {
                 console.log(docs);
                 response.render('e_transfer_collect.hbs', {
                     username: user_name,
-                    transfer: docs[0].transfer,
-                    e_password: docs[0].e_password,
-                    from: docs[0].from,
-                    to: docs[0].to
+                    transfer: result[0].transfer,
+                    e_password: result[0].e_password,
+                    from: result[0].from,
+                    to: result[0].to
                 })    
             }
         });
