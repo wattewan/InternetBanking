@@ -647,6 +647,10 @@ app.get('/home/:name', function (request, response) {
 
         var currencies = docs[0].foreign_currencys;
 
+        if (currencies === undefined) {
+            currencies = []
+        }
+
         var num_of_cur = currencies.length;
         var display_currencies = [];
 
@@ -862,6 +866,12 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
             if (err) {
                 console.log('Unable to get user');
             }
+            if (docs === []) {
+                response.render('no_transfers.hbs', {
+                    username: user_name
+                });
+            }
+            console.log(docs);
             response.render('e_transfer_collect.hbs', {
                 username: user_name,
                 transfer: docs[0].transfer,
