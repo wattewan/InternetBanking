@@ -1069,7 +1069,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
         }
 
 
-        if (Number.isInteger(deposit) && (account === 'checkings')) {
+        if (Number.isInteger(deposit) && (account === 'Checkings')) {
             var balance = docs[0].checkings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
@@ -1077,7 +1077,7 @@ app.post('/home/currency/deposit/:name', function (request, response) {
                 username: user_name,
             });
         }
-        else if (Number.isInteger(deposit) && (account === 'savings')) {
+        else if (Number.isInteger(deposit) && (account === 'Savings')) {
             var balance = docs[0].savings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
