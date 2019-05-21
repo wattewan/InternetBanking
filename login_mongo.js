@@ -704,6 +704,7 @@ app.get('/home/e_transfer/collect/:name', function (request, response) {
 
 
 app.post('/home/e_transfer/collect/:name', function (request, response) {
+    
     var db = utils.getDb();
     var user_name = request.params.name;
 
@@ -715,36 +716,30 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
         console.log('OK');
     }
 
-    db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
+    db.collection('bank').find({username: user_name}).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
         }
+        var email = docs[0].email;
 
-        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
+        db.collection('bank').find({e_transfer: true, to: email}).toArray((err, docs) => {
             if (err) {
                 console.log('Unable to get user');
             }
-            if (docs === []) {
-                response.render('no_transfers.hbs', {
-                    username: user_name
-                });
+            if (!docs[0]) {
+                response.render('e_transfer_check.hbs');
+            } else {
+                console.log(docs);
+                response.render('e_transfer_collect.hbs', {
+                    username: user_name,
+                    transfer: docs[0].transfer,
+                    e_password: docs[0].e_password,
+                    from: docs[0].from,
+                    to: docs[0].to
+                })    
             }
-            console.log(docs);
-            response.render('e_transfer_collect.hbs', {
-                username: user_name,
-                transfer: docs[0].transfer,
-                e_password: docs[0].e_password,
-                from: docs[0].from,
-                to: docs[0].to
-            })
-
-            var new_balance = parseInt(balance) - parseInt(transfer);
-            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-            response.render('thankyou.hbs', {
-                username: user_name,
-            });
-
         });
+
     });
 });
 
