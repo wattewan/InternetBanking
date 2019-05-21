@@ -506,6 +506,10 @@ app.get('/home/:name', function (request, response) {
 
         var currencies = docs[0].foreign_currencys;
 
+        if (currencies === undefined) {
+            currencies = []
+        }
+
         var num_of_cur = currencies.length;
         var display_currencies = [];
 
@@ -716,15 +720,31 @@ app.post('/home/e_transfer/collect/:name', function (request, response) {
             console.log('Unable to get user');
         }
 
-        var balance = docs[0].checkings;
-        var email = docs[0].email;
+        db.collection('bank').find({ e_transfer: true, to: email }).toArray((err, docs) => {
+            if (err) {
+                console.log('Unable to get user');
+            }
+            if (docs === []) {
+                response.render('no_transfers.hbs', {
+                    username: user_name
+                });
+            }
+            console.log(docs);
+            response.render('e_transfer_collect.hbs', {
+                username: user_name,
+                transfer: docs[0].transfer,
+                e_password: docs[0].e_password,
+                from: docs[0].from,
+                to: docs[0].to
+            })
 
-        var new_balance = parseInt(balance) - parseInt(transfer);
-        db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-        response.render('thankyou.hbs', {
-            username: user_name,
+            var new_balance = parseInt(balance) - parseInt(transfer);
+            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
+            response.render('thankyou.hbs', {
+                username: user_name,
+            });
+
         });
-
     });
 });
 
@@ -928,7 +948,8 @@ app.post('/home/currency/deposit/:name', function (request, response) {
             response.render('thankyou.hbs', {
                 username: user_name,
             });
-        } else if (Number.isInteger(deposit) && (account === 'Savings')) {
+        }
+        else if (Number.isInteger(deposit) && (account === 'Savings')) {
             var balance = docs[0].savings;
             var new_balance = parseInt(balance) + parseInt(deposit);
             db.collection('bank').updateOne({ username: user_name }, { $set: { savings: new_balance } });
