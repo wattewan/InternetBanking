@@ -397,6 +397,7 @@ app.post('/home/update/update/:name', function (request, response) {
     var db = utils.getDb();
 
     var pass_word = request.body.password;
+    pass_word = bcrypt.hashSync(pass_word, saltRounds); 
     var first_name = request.body.first_name;
     var last_name = request.body.last_name;
     var email = request.body.email;
@@ -416,25 +417,25 @@ app.post('/home/update/update/:name', function (request, response) {
     db.collection('bank').find({ username: user_name }).toArray((err, docs) => {
         if (err) {
             console.log('Unable to get user');
-        }
-        db.collection('bank').update({ username: user_name },
-            {
-                $set:
+            response.render('error.hbs');
+        } else {
+            db.collection('bank').update({ username: user_name },
                 {
-                    username: user_name,
-                    password: pass_word,
-                    first_name: first_name,
-                    last_name: last_name,
-                    email: email,
-                    phone_num: phone_num
-                }
-            });
-        // response.send("Thank You");
-        response.render('thankyou.hbs', {
-            username: user_name,
-        })
-
-
+                    $set:
+                    {
+                        username: user_name,
+                        password: pass_word,
+                        first_name: first_name,
+                        last_name: last_name,
+                        email: email,
+                        phone_num: phone_num
+                    }
+                });
+            // response.send("Thank You");
+            response.render('thankyou.hbs', {
+                username: user_name,
+            })
+        }
     })
 });
 
