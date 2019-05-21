@@ -1143,7 +1143,7 @@ app.post('/home/currency/withdraw/:name', function(request, response) {
             })
 
         } else{
-            if (account === 'savings') {
+            if (account === 'Savings') {
                 var balance = docs[0].savings;
                 var new_balance = parseInt(balance) - parseInt(withdraw);
                 if (new_balance < 0) {
