@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/views/cur_calculator.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/cur_calculator.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/cur_calc.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/cur_calc.hbs" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,13 +17,13 @@
     <session id="1110042359">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="hbs" value="124" />
+          <entry key="hbs" value="125" />
           <entry key="js" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Handlebars/Mustache" value="124" />
+          <entry key="Handlebars/Mustache" value="125" />
           <entry key="JavaScript" value="1" />
         </counts>
       </usages-collector>
@@ -39,7 +39,7 @@
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.opened" value="2" />
@@ -120,8 +120,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/partials/cur_calc.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+            <state relative-caret-position="352">
+              <caret line="40" column="36" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -155,8 +155,8 @@
         <option value="$PROJECT_DIR$/login_mongo.js" />
         <option value="$PROJECT_DIR$/views/e_transfer.hbs" />
         <option value="$PROJECT_DIR$/views/thankyou.hbs" />
-        <option value="$PROJECT_DIR$/views/partials/cur_calc.hbs" />
         <option value="$PROJECT_DIR$/views/cur_calculator.hbs" />
+        <option value="$PROJECT_DIR$/views/partials/cur_calc.hbs" />
       </list>
     </option>
   </component>
@@ -251,16 +251,15 @@
       <workItem from="1558471152957" duration="43000" />
       <workItem from="1558473707705" duration="976000" />
       <workItem from="1558492454714" duration="1296000" />
-      <workItem from="1558518199394" duration="2690000" />
+      <workItem from="1558518199394" duration="4256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6737000" />
+    <option name="totallyTimeSpent" value="8303000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1314399" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -268,7 +267,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49867898" visible="true" weight="0.32152975" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49867898" weight="0.32152975" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -404,8 +403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/partials/cur_calc.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="36" lean-forward="true" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+        <state relative-caret-position="352">
+          <caret line="40" column="36" lean-forward="true" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
         </state>
       </provider>
     </entry>
