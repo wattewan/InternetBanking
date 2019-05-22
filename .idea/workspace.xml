@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="" />
+    <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/views/cur_calculator.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/cur_calculator.hbs" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -15,24 +17,24 @@
     <session id="1110042359">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="hbs" value="103" />
+          <entry key="hbs" value="122" />
           <entry key="js" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Handlebars/Mustache" value="103" />
+          <entry key="Handlebars/Mustache" value="122" />
           <entry key="JavaScript" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="hbs" value="4" />
+          <entry key="hbs" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Handlebars/Mustache" value="4" />
+          <entry key="Handlebars/Mustache" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -104,13 +106,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/cur_calculator.hbs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7565">
-              <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
+            <state relative-caret-position="136">
+              <caret line="134" column="92" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
               <folding>
                 <element signature="e#5699#5861#0#HTML" expanded="true" />
                 <element signature="e#18968#19128#0#HTML" expanded="true" />
                 <element signature="e#19301#19327#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/partials/cur_calc.hbs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="884">
+              <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -144,6 +155,7 @@
         <option value="$PROJECT_DIR$/login_mongo.js" />
         <option value="$PROJECT_DIR$/views/e_transfer.hbs" />
         <option value="$PROJECT_DIR$/views/thankyou.hbs" />
+        <option value="$PROJECT_DIR$/views/partials/cur_calc.hbs" />
         <option value="$PROJECT_DIR$/views/cur_calculator.hbs" />
       </list>
     </option>
@@ -239,15 +251,15 @@
       <workItem from="1558471152957" duration="43000" />
       <workItem from="1558473707705" duration="976000" />
       <workItem from="1558492454714" duration="1296000" />
-      <workItem from="1558518199394" duration="1994000" />
+      <workItem from="1558518199394" duration="2255000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6041000" />
+    <option name="totallyTimeSpent" value="6302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="7" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1314399" />
@@ -378,10 +390,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/partials/cur_calc.hbs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/cur_calculator.hbs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7565">
-          <caret line="445" lean-forward="true" selection-start-line="445" selection-end-line="445" />
+        <state relative-caret-position="136">
+          <caret line="134" column="92" selection-start-line="134" selection-start-column="92" selection-end-line="134" selection-end-column="92" />
           <folding>
             <element signature="e#5699#5861#0#HTML" expanded="true" />
             <element signature="e#18968#19128#0#HTML" expanded="true" />
