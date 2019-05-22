@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/views/cur_calculator.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/cur_calculator.hbs" afterDir="false" />
-    </list>
+    <list default="true" id="3ac6cb6c-eca3-430d-85b4-a1cd1717a0a3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -241,15 +239,15 @@
       <workItem from="1558471152957" duration="43000" />
       <workItem from="1558473707705" duration="976000" />
       <workItem from="1558492454714" duration="1296000" />
-      <workItem from="1558518199394" duration="1277000" />
+      <workItem from="1558518199394" duration="1994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5324000" />
+    <option name="totallyTimeSpent" value="6041000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1314399" />

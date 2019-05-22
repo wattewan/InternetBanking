@@ -1,0 +1,53 @@
+<script>
+    function convert(){
+        var amount = document.getElementById("Amount").value;
+        if(amount<0){
+            alert("Input must be Positive Number");
+            return
+        }
+        var firstcurr = document.getElementById("currency1").value;
+        var secondcurr = document.getElementById("currency2").value;
+        if (firstcurr == secondcurr){
+            alert("Currency must be different");
+            return
+        }
+        var request = new XMLHttpRequest();
+        request.open('GET','http://data.fixer.io/api/latest?access_key=5c8f0e7cc743c0b5df34b3703e2b51fb&format=1');
+        request.onload = function(){
+            var ourdata = JSON.parse(request.responseText);
+            console.log(ourdata);
+
+            var euro = amount / ourdata.rates[firstcurr];
+            var final = euro  * ourdata.rates[secondcurr];
+            final = final.toFixed(2);
+            final = final.toString();
+            document.getElementById('output').value= final;
+        };
+        request.send()
+    }
+    function convertrealtime(){
+        var amount = document.getElementById("Amount").value;
+        if(amount<0){
+            alert("Input must be Positive Number");
+            return
+        }
+
+        var firstcurr = document.getElementById("currency1").value;
+        var secondcurr = document.getElementById("currency2").value;
+
+
+        var request = new XMLHttpRequest();
+        request.open('GET','http://data.fixer.io/api/latest?access_key=5c8f0e7cc743c0b5df34b3703e2b51fb&format=1');
+        request.onload = function(){
+            var ourdata = JSON.parse(request.responseText);
+            console.log(ourdata);
+            var euro = amount / ourdata.rates[firstcurr];
+            var final = euro  * ourdata.rates[secondcurr];
+            final = final.toFixed(2);
+            final = final.toString();
+            document.getElementById('output').value= final;
+            document.getElementById('rate').value = 1 + " "+ firstcurr + " = " + ourdata.rates[secondcurr] + " " + secondcurr
+        };
+        request.send()
+    }
+</script>
