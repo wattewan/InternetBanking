@@ -657,11 +657,7 @@ app.post('/home/e_transfer/:name', function (request, response) {
             });
         }
         else {
-
-            response.render('thankyou.hbs', {
-                username: user_name,
-            });
-
+            
             db.collection('bank').insertOne({
                 e_transfer: true,
                 from: user_name,
@@ -681,26 +677,6 @@ app.post('/home/e_transfer/:name', function (request, response) {
 
 
 
-
-
-
-        var new_balance = parseInt(balance) - parseInt(transfer);
-        if (new_balance < 0) {
-            response.send(`Cannot transfer ${transfer} from this account. Insufficient funds.`);
-        }
-        else {
-            db.collection('bank').insertOne({
-                e_transfer: true,
-                from: user_name,
-                to: email,
-                transfer: transfer,
-                e_password: e_password
-            });
-            db.collection('bank').updateOne({ username: user_name }, { $set: { checkings: new_balance } });
-            response.render('thankyou.hbs', {
-                username: user_name,
-            });
-        }
     });
 
 
