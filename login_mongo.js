@@ -657,7 +657,7 @@ app.post('/home/e_transfer/:name', function (request, response) {
             });
         }
         else {
-            
+
             db.collection('bank').insertOne({
                 e_transfer: true,
                 from: user_name,
